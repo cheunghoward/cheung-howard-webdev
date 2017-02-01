@@ -1,2 +1,4 @@
 node_modules
 .idea
+*bootstrap.min.css
+.DS_Store
