@@ -1,9 +1,14 @@
 input.form-control {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    margin-bottom: 10px;
 }
 
 body {
     padding-top: 65px;
+    overflow: hidden ;
 }
 
 .navbar-default {
