@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Widget Chooser</title>
+    <title>Widget Image</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -29,20 +29,36 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <br><br><br>
-    <a href="widget-heading.html">Header</a>
-    <a class="center-block" href="widget-image.html">Image</a>
-    <a href="widget-youtube.html">Youtube</a>
+    <label for="name">Name</label>
+    <input id="name" class="form-control" type="text" placeholder="Page Name" value="Blog Post"/>
+
+    <label for="text">Text</label>
+    <input id="text" class="form-control" type="text" placeholder="Text"/>
+
+    <label for="url">URL</label>
+    <input id="url" class="form-control" type="text" placeholder="http://facebook.com"/>
+
+    <label for="width">Width</label>
+    <input id="width" class="form-control" type="text" placeholder="100%"/>
+
+    <label for="upload">Upload</label>
+    <input id="upload" class="form-control" type="file"/>
+
+    <a class="btn btn-primary btn-block" href="widget-list.html">
+        Upload Image
+    </a>
+    <a class="btn btn-danger btn-block" href="widget-list.html">
+        Delete
+    </a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="profile.html">
+            <a href="../user/profile.html">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
     </div>
 </nav>
-
 </body>
 </html>
