@@ -6,7 +6,7 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/login",{
-                templateUrl: 'user/login.html',
+                templateUrl: 'views/user/login.view.client.html',
             });
 
     }
