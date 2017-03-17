@@ -23,7 +23,37 @@
         return api;
 
         function createUser(user) {
-            users.push({_id: counter++, })
+            users.push({_id: counter++, username: user.username, password: user.password})
+        }
+
+        function findUserById(userId) {
+            for(var u in users) {
+                var user = users[u];
+                if( user._id === userId ) {
+                    return angular.copy(user);
+                }
+            }
+            return null;
+        }
+
+        function findUserByUsername(username) {
+            for (var u in users) {
+                var user = users[u];
+                if( user.username === username ) {
+                    return angular.copy(user);
+                }
+            }
+        }
+
+        function findUserByCredentials(username, password) {
+            for(var u in users) {
+                var user = users[u];
+                if( user.username === username &&
+                    user.password === password) {
+                    return angular.copy(user);
+                }
+            }
+            return null;
         }
 
         function updateUser(userId, newUser) {
@@ -38,25 +68,13 @@
             return null;
         }
 
-        function findUserById(uid) {
-            for(var u in users) {
+        function deleteUser(userId) {
+            for (var u in users) {
                 var user = users[u];
-                if( user._id === uid ) {
-                    return angular.copy(user);
+                if( user._id === userId ) {
+                    users.remove(u);
                 }
             }
-            return null;
-        }
-
-        function findUserByCredentials(username, password) {
-            for(var u in users) {
-                var user = users[u];
-                if( user.username === username &&
-                    user.password === password) {
-                    return angular.copy(user);
-                }
-            }
-            return null;
         }
     }
 })();
