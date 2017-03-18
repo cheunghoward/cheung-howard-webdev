@@ -10,10 +10,6 @@
                 controller: 'loginController',
                 controllerAs: 'model'
             })
-            .when("/", {
-                templateUrl: 'views/user/login.view.client.html',
-                controllerAs: 'model'
-            })
             .when("/register", {
                 templateUrl: 'views/user/register.view.client.html',
                 controllerAs: 'model',
@@ -59,7 +55,7 @@
                 controllerAs: 'model'
             })
             .otherwise({
-                redirectTo: '/',
+                redirectTo: '/login',
             });
     }
 })();

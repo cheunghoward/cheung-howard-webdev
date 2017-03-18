@@ -15,10 +15,12 @@
 
         var api = {
             "users": users,
-            "updateUser": updateUser,
-            "findUserByCredentials": findUserByCredentials,
-            "findUserById": findUserById,
             "createUser": createUser,
+            "findUserById": findUserById,
+            "findUserByUsername": findUserByUsername,
+            "findUserByCredentials": findUserByCredentials,
+            "updateUser": updateUser,
+            "deleteUser": deleteUser,
         };
         return api;
 
