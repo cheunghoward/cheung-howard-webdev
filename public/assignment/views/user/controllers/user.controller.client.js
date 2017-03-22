@@ -1,9 +1,11 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .controller("loginController", loginController);
+        .controller("LoginController", LoginController)
+        .controller("ProfileController", ProfileController)
+        .controller("RegisterController", RegisterController);
 
-    function loginController(UserService, $location) {
+    function LoginController(UserService, $location) {
         var vm = this;
         vm.login = login;
 
@@ -15,5 +17,13 @@
                 vm.error = 'user not found';
             }
         }
+    }
+
+    function ProfileController(UserService, $location) {
+        var vm = this;
+    }
+
+    function RegisterController(UserService, $location) {
+        var vm = this;
     }
 })();
