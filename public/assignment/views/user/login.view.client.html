@@ -5,17 +5,17 @@
         {{model.error}}
     </div>
 
-    <input ng-model="user.username"
+    <input ng-model="model.user.username"
            class="form-control"
            placeholder="username"/>
 
-    <input ng-model="user.password"
+    <input ng-model="model.user.password"
            class="form-control"
            type="password"
            placeholder="password"/>
 
     <a class="btn btn-primary btn-block"
-       ng-click="model.login(user)">
+       ng-click="model.login(model.user)">
         Login
     </a>
 

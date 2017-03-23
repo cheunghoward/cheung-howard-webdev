@@ -19,8 +19,13 @@
         }
     }
 
-    function ProfileController(UserService, $location) {
+    function ProfileController(UserService, $routeParams) {
         var vm = this;
+        vm.userId = $routeParams["uid"];
+        function init() {
+            vm.user = UserService.findUserById(vm.userId);
+        }
+        init();
     }
 
     function RegisterController(UserService, $location) {

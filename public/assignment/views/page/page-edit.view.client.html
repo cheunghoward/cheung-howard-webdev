@@ -19,11 +19,11 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <label for="first">Name</label>
-    <input id="first" class="form-control" type="text" placeholder="Page Name" value="Blog Post"/>
+    <label for="name">Name</label>
+    <input ng-model="model.page.name" id="name" class="form-control" type="text" placeholder="Page Name" value="Blog Post"/>
 
-    <label for="last">Title</label>
-    <input id="last" class="form-control" type="text" placeholder="Page Title"/>
+    <label for="title">Title</label>
+    <input ng-model="model.page.title" id="title" class="form-control" type="text" placeholder="Page Title"/>
 
     <a class="btn btn-danger btn-block" href="#!/user/123/website/456/page">
         Delete

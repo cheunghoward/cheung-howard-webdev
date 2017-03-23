@@ -18,19 +18,19 @@
 <div class="container-fluid">
     <h1>Profile</h1>
     <label for="first">First Name</label>
-    <input id="first" class="form-control" type="text" placeholder="First Name"/>
+    <input ng-model="model.user.firstName" id="first" class="form-control" type="text" placeholder="First Name"/>
 
     <label for="last">Last Name</label>
-    <input id="last" class="form-control" type="text" placeholder="Last Name"/>
+    <input ng-model="model.user.lastName" id="last" class="form-control" type="text" placeholder="Last Name"/>
 
     <label for="email">Email</label>
-    <input id="email" class="form-control" type="email" placeholder="Email"/>
+    <input ng-model="model.user.email" id="email" class="form-control" type="email" placeholder="Email"/>
 
     <label>Username</label>
-    <input class="form-control" type="text" placeholder="Username"/>
+    <input ng-model="model.user.username" class="form-control" type="text" placeholder="Username"/>
 
     <label>Password</label>
-    <input class="form-control" type="password" placeholder="Password"/>
+    <input ng-model="model.user.password" class="form-control" type="password" placeholder="Password"/>
 
     <a class="btn btn-primary btn-block" href="#!/user/123/website">
         Websites

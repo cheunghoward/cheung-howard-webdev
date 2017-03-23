@@ -93,13 +93,15 @@
     </div>
     <div class="container-fluid col-sm-8 wbdv-right-pane col-xs-12">
         <label for="website-name">Website Name</label>
-        <input placeholder="Website Name"
+        <input ng-model="model.website.name"
+               placeholder="Website Name"
                value="Blogger"
                class="form-control"
                id="website-name"/>
 
         <label for="website-description">Website Description</label>
-        <textarea placeholder="Website Description"
+        <textarea ng-model="model.website.description"
+                  placeholder="Website Description"
                   class="form-control"
                   rows="3"
                   id="website-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.

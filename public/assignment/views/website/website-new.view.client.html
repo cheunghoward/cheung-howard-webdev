@@ -94,12 +94,14 @@
     </div>
     <div class="container-fluid col-sm-8 wbdv-right-pane col-xs-12">
         <label for="website-name">Name</label>
-        <input placeholder="Name"
+        <input ng-model="model.website.name"
+               placeholder="Name"
                class="form-control"
                id="website-name"/>
 
         <label for="website-description">Description</label>
-        <textarea placeholder="Description"
+        <textarea ng-model="model.website.description"
+                  placeholder="Description"
                   class="form-control"
                   rows="3"
                   id="website-description"></textarea>
