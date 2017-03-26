@@ -22,13 +22,30 @@
     function ProfileController(UserService, $routeParams) {
         var vm = this;
         vm.userId = $routeParams["uid"];
+        vm.updateUser = updateUser;
+
         function init() {
             vm.user = UserService.findUserById(vm.userId);
         }
         init();
+
+        function updateUser(user) {
+            UserService.updateUser(vm.userId, user);
+            alert("User updated");
+        }
     }
 
     function RegisterController(UserService, $location) {
         var vm = this;
+        vm.register = register;
+
+        function register(user) {
+            var newUser = UserService.createUser(user);
+            if(newUser != null) {
+                $location.url('/user/' + newUser);
+            } else {
+                vm.error = 'cannot create user';
+            }
+        }
     }
 })();

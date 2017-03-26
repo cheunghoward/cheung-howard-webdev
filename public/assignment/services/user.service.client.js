@@ -25,13 +25,15 @@
         return api;
 
         function createUser(user) {
-            users.push({_id: counter++, username: user.username, password: user.password})
+            var id = ++counter;
+            users.push({_id: id, username: user.username, password: user.password});
+            return id;
         }
 
         function findUserById(userId) {
             for(var u in users) {
                 var user = users[u];
-                if( user._id === userId ) {
+                if( users[u]._id == userId ) {
                     return angular.copy(user);
                 }
             }

@@ -1,19 +1,20 @@
 <div class="container">
     <h1>Register</h1>
-    <input ng-model="model.user.username"
+    <input ng-model="user.username"
            type="text"
            class="form-control"
            placeholder="username"/>
-    <input ng-model="model.user.password"
+    <input ng-model="user.password"
            type="password"
            class="form-control"
            placeholder="password"/>
-    <input ng-model="model.user.password"
+    <input ng-model="user.password"
            type="password"
            class="form-control"
            placeholder="verify password"/>
-    <a class="btn btn-primary btn-block"
-       href="#!/user/123">Register</a>
+    <a ng-click="model.register(user)" class="btn btn-primary btn-block">
+        Register
+    </a>
     <a class="btn btn-danger  btn-block"
        href="#!/login">Cancel</a>
 </div>

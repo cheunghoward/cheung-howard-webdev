@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div class="navbar-text pull-right">
-                <a href="#!/user/{{model.userId}}/website">
+                <a ng-click="model.createWebsite(website)" href="#!/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
@@ -60,13 +60,13 @@
     </div>
     <div class="container-fluid col-sm-8 wbdv-right-pane col-xs-12">
         <label for="website-name">Name</label>
-        <input ng-model="model.website.name"
+        <input ng-model="website.name"
                placeholder="Name"
                class="form-control"
                id="website-name"/>
 
         <label for="website-description">Description</label>
-        <textarea ng-model="model.website.description"
+        <textarea ng-model="website.description"
                   placeholder="Description"
                   class="form-control"
                   rows="3"

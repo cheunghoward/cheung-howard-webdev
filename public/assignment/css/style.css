@@ -8,7 +8,7 @@ textarea {
 
 body {
     padding-top: 65px;
-    overflow: hidden ;
+    padding-bottom: 65px;
 }
 
 iframe {

@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-header">
             <a class="navbar-brand no-left-padding no-left-margin">
-                New Page
+                Edit Page
             </a>
         </div>
     </div>
@@ -25,7 +25,10 @@
     <label for="title">Title</label>
     <input ng-model="model.page.title" id="title" class="form-control" type="text" placeholder="Page Title"/>
 
-    <a class="btn btn-danger btn-block" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
+    <a ng-click="model.updatePage(model.page)" class="btn btn-primary btn-block">
+        Update
+    </a>
+    <a ng-click="model.deletePage()" class="btn btn-danger btn-block" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
         Delete
     </a>
 </div>
