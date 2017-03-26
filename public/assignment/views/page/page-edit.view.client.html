@@ -2,12 +2,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="#!/user/123/website/456/page">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a href="#!/user/123/website/456/page">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </div>
@@ -25,14 +25,14 @@
     <label for="title">Title</label>
     <input ng-model="model.page.title" id="title" class="form-control" type="text" placeholder="Page Title"/>
 
-    <a class="btn btn-danger btn-block" href="#!/user/123/website/456/page">
+    <a class="btn btn-danger btn-block" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page">
         Delete
     </a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="#!/user/123">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>

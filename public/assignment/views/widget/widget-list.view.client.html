@@ -2,51 +2,97 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="#!/user/123/website/456/page">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a href="#!/user/123/website/456/page/789/widget/new">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand no-left-padding no-left-margin">
-                Widgets
-            </a>
+            <a class="navbar-brand" href="#">Widgets</a>
         </div>
     </div>
 </nav>
+</div>
 <div class="container-fluid">
-    <a href="#!/user/123/website/456/page/789/widget/new">
-        Widget Chooser
-    </a>
-    <br>
-    <a href="#!/user/123/website/456/page/789/widget/1011" class="glyphicon glyphicon-cog">Edit Header</a>
-    <br>
-    <a href="#!/user/123/website/456/page/789/widget/1011" class="glyphicon glyphicon-cog">Edit Image</a>
-    <br>
-    <a href="#!/user/123/website/456/page/789/widget/1011" class="glyphicon glyphicon-cog">Edit YouTube</a>
-    <h1>Howard Howard</h1>
-    <iframe src="https://www.youtube.com/embed/8YWl7tDGUPA?list=PL7XlqX4npddfrdpMCxBnNZXg2GFll7t5y" frameborder="0" allowfullscreen></iframe>
-    <br>
-    Here is some text Lorem Ipsum is simply dummy text of the
-    printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of
-    type and scrambled it to make a type specimen book. It has survived not only five centuries,
-    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-    like Aldus PageMaker including versions of Lorem Ipsum.
+    <div ng-repeat="widget in model.widgets">
+        <div class="jga-toolbar">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+
+        <!--<ng-include src="model.getWidgetTemplateUrl(widget.widgetType)"></ng-include>--><!--
+
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER">
+                <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/widget-image.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/widget-youtube.view.client.html'"></ng-include>
+            </div>
+        </div>-->
+    </div>
+
+    {{model.widgets}}
+    <div>
+        <div class="jga-toolbar">
+            <a>
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <h1>GIZMODO</h1>
+    </div>
+    <div>
+        <h3>New Measurements of the Universe Expanding Tell a Confusing Story</h3>
+    </div>
+    <div>
+        <div class="jga-toolbar">
+            <a>
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+
+        <img width="100%" src="https://i.kinja-img.com/gawker-media/image/upload/s--UE7cu6DV--/c_scale,fl_progressive,q_80,w_800/xoo0evqxzxrrmrn4ayoq.jpg">
+    </div>
+    <div>
+        <div class="jga-toolbar">
+            <a>
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+
+        <p>At the Environmental Protection Agency, it’s typical for an incoming administration to implement a realignment of sorts—with some grants or contracts, for instance, being frozen temporarily—but a decision by President Donald Trump’s staff to
+            <a href="http://www.latimes.com/politics/washington/la-na-trailguide-updates-trump-administration-orders-media-1485281190-htmlstory.html" target="_blank" rel="noopener">order a total media blackout</a>,
+            as well as ban any new spending, has left some employees rattled. <br></p>
+    </div>
+    <div>
+        <div class="jga-toolbar">
+            <a>
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <iframe width="100%" src="https://www.youtube.com/embed/vQD1Txzvq70" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="#!/user/123">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
     </div>
 </nav>
-</div>

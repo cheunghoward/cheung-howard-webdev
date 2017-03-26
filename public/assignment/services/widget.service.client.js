@@ -37,7 +37,7 @@
         }
 
         function findWidgetsByPageId(pageId) {
-            var wids = {};
+            var wids = [];
             for (var w in widgets) {
                 if (widgets[w].pageId === pageId) {
                     wids.push(angular.copy(widgets[w]));

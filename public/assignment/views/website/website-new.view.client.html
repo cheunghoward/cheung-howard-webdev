@@ -4,7 +4,7 @@
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
-                <a href="#!/user/123/website">
+                <a href="#!/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
@@ -14,19 +14,19 @@
                 </a>
             </div>
             <div class="navbar-text pull-right">
-                <a href="#!/user/123/website">
+                <a href="#!/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="navbar-text pull-left">
-                <a href="#!/user/123/website">
+                <a href="#!/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
             <div class="navbar-text pull-right">
-                <a href="#!/user/123/website">
+                <a href="#!/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
@@ -42,54 +42,20 @@
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs wbdv-left-pane">
         <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-sm-10">
-                        Address Book App
+            <div ng-repeat="website in model.websites">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            {{website.name}}
+                        </div>
+                        <div class="col-xs-1">
+                            <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-sm-1">
-                        <a href="#!/user/123/website/456">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-10">
-                        Blogger
-                    </div>
-                    <div class="col-xs-1">
-                        <a href="#!/user/123/website/456">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-10">
-                        Blogging App
-                    </div>
-                    <div class="col-xs-1">
-                        <a href="#!/user/123/website/456">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-10">
-                        Script Testing App
-                    </div>
-                    <div class="col-xs-1">
-                        <a href="#!/user/123/website/456">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
+                </li>
+            </div>
         </ul>
     </div>
     <div class="container-fluid col-sm-8 wbdv-right-pane col-xs-12">
@@ -109,13 +75,13 @@
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#!/user/123">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-text pull-right">
+                <a href="#!/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </div>
