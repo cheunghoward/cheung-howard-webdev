@@ -19,7 +19,20 @@
     </div>
 </nav>
 <div class="container-fluid">
-
+    <ul class="list-group">
+        <div ng-repeat="widgetType in model.widgetTypes">
+            <li ng-click="model.createWidget(widgetType)" class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-11">
+                        {{widgetType}}
+                    </div>
+                    <div class="col-xs-1">
+                        <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+                    </div>
+                </div>
+            </li>
+        </div>
+    </ul>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
