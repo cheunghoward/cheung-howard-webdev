@@ -10,12 +10,19 @@
         vm.login = login;
 
         function login(user) {
-            var loginUser = UserService.findUserByCredentials(user.username, user.password);
-            if(loginUser != null) {
-                $location.url('/user/' + loginUser._id);
-            } else {
-                vm.error = 'user not found';
-            }
+            var promise = UserService.findUserByCredentials(user.username, user.password);
+            promise
+                .then(function (user) {
+                    var loginUser = user.data;
+                    if(loginUser != null) {
+                        $location.url('/user/' + loginUser._id);
+                        console.log(loginUser);
+                    } else {
+                        vm.error = 'user not found';
+                    }
+                }, (function(err) {
+                    vm.error = 'user not found';
+                }));
         }
     }
 
@@ -25,13 +32,27 @@
         vm.updateUser = updateUser;
 
         function init() {
-            vm.user = UserService.findUserById(vm.userId);
+            UserService
+                .findUserById(vm.userId)
+                .then(renderUser);
         }
         init();
 
         function updateUser(user) {
-            UserService.updateUser(vm.userId, user);
-            alert("User updated");
+            var promise = UserService.updateUser(vm.userId, user);
+            promise.then(
+                function(res){
+                    alert("Successfully updated user");
+                },
+                function(err) {
+                    console.log(err);
+                }
+            );
+        }
+
+        function renderUser(user) {
+            vm.user = user.data;
+            console.log(user);
         }
     }
 
@@ -41,11 +62,16 @@
 
         function register(user) {
             var newUser = UserService.createUser(user);
-            if(newUser != null) {
-                $location.url('/user/' + newUser);
-            } else {
-                vm.error = 'cannot create user';
-            }
+            newUser.then(function(user) {
+                if(user != null) {
+                    $location.url('/user/' + user.data._id);
+                } else {
+                    vm.error = 'cannot create user';
+                }
+            },
+            function(err) {
+                console.log(err);
+            });
         }
     }
 })();
