@@ -5,18 +5,22 @@
         .controller("PageEditController", PageEditController)
         .controller("PageNewController", PageNewController);
 
-    function PageListController(PageService, $routeParams) {
+    function PageListController(PageService, $routeParams, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            var promise = PageService.findPageByWebsiteId(vm.websiteId);
+            promise
+                .then(function (res) {
+                    vm.pages = res.data;
+                });
         }
         init();
     }
 
-    function PageEditController(PageService, $routeParams) {
+    function PageEditController(PageService, $routeParams, $location) {
         var vm = this;
         vm.pageId = $routeParams["pid"];
         vm.userId = $routeParams["uid"];
@@ -25,21 +29,42 @@
         vm.deletePage = deletePage;
 
         function init() {
-            vm.page = PageService.findPageById(vm.pageId);
+            var promise = PageService.findPageById(vm.pageId);
+            promise
+                .then(function(res) {
+                    vm.page = res.data;
+                });
         }
         init();
 
         function updatePage(page) {
-            PageService.updatePage(vm.pageId, page);
-            alert("page has been updated");
+            var promise = PageService.updatePage(vm.pageId, page);
+            promise
+                .then(function (res) {
+                    alert("page has been updated");
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId
+                        +'/page');
+                },
+                function (err) {
+                    console.log(err);
+                });
         }
 
         function deletePage() {
-            PageService.deletePage(vm.pageId);
+            var promise = PageService.deletePage(vm.pageId);
+            promise
+                .then(function (res) {
+                    alert("page has been deleted");
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId
+                        +'/page');
+                },
+                function (err) {
+                    console.log(err);
+                });
         }
     }
 
-    function PageNewController(PageService, $routeParams) {
+    function PageNewController(PageService, $routeParams, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -47,6 +72,8 @@
 
         function createPage(page) {
             PageService.createPage(vm.websiteId, page);
+            $location.url('/user/'+vm.userId+'/website/'+vm.websiteId
+                +'/page');
         }
     }
 })();

@@ -45,6 +45,7 @@
                 .then(
                     function(res){
                         alert("Successfully updated website");
+                        $location.url('#!/user/'+vm.userId+'/website');
                     },
                     function(err) {
                         console.log(err);
@@ -58,6 +59,7 @@
                 .then(
                     function(res){
                         alert("Successfully deleted website");
+                        $location.url('#!/user/'+vm.userId+'/website');
                     },
                     function(err) {
                         console.log(err);

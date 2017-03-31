@@ -18,7 +18,6 @@ module.exports = function(app) {
         var website = req.body;
         website.developerId = req.params.userId;
         website._id = (new Date()).getTime();
-        console.log(website);
         websites.push(website);
         res.json(website);
     }
