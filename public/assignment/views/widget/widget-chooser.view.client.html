@@ -21,7 +21,7 @@
 <div class="container-fluid">
     <ul class="list-group">
         <div ng-repeat="widgetType in model.widgetTypes">
-            <li ng-click="model.createWidget(widgetType)" class="list-group-item">
+            <li ng-click="model.createWidget({'type': widgetType})" class="list-group-item">
                 <div class="row">
                     <div class="col-xs-11">
                         {{widgetType}}

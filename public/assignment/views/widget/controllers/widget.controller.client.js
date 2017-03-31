@@ -14,7 +14,11 @@
         vm.trustUrl = trustUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            var promise = WidgetService.findWidgetsByPageId(vm.pageId);
+            promise
+                .then(function(res) {
+                    vm.widgets = res.data;
+                });
         }
         init();
 
@@ -23,7 +27,7 @@
         }
     }
 
-    function WidgetEditController(WidgetService, $routeParams) {
+    function WidgetEditController(WidgetService, $routeParams, $location) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.websiteId = $routeParams["wid"];
@@ -33,19 +37,41 @@
         vm.deleteWidget = deleteWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            var promise = WidgetService.findWidgetById(vm.widgetId);
+            promise
+                .then(function(res) {
+                    vm.widget = res.data;
+                });
         }
         init();
 
 
         function updateWidget(widget) {
-            WidgetService.updateWidget(vm.widgetId, widget);
-            console.log(widget);
-            alert("widget updated");
+            var promise = WidgetService.updateWidget(vm.widgetId, widget);
+            promise
+                .then(function(res) {
+                        alert("widget updated");
+                        $location.url('/user/' + vm.userId + '/website/' + vm.websiteId + '/page/' +
+                            vm.pageId + '/widget/');
+                    },
+                    function(err) {
+                        console.log(err);
+                    });
+
         }
 
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetId);
+            var promise = WidgetService.deleteWidget(vm.widgetId);
+            promise
+                .then(function(res) {
+                        alert("widget deleted");
+                        $location.url('/user/' + vm.userId + '/website/' + vm.websiteId + '/page/' +
+                            vm.pageId + '/widget/');
+                    },
+                    function(err) {
+                        console.log(err);
+                    }
+                );
         }
     }
 
@@ -62,9 +88,16 @@
         init();
 
         function createWidget(type) {
-            var newWidget = WidgetService.createWidget(vm.pageId, type);
-            $location.url('/user/' + vm.userId + '/website/' + vm.websiteId + '/page/' +
-                vm.pageId + '/widget/' + newWidget);
+            var promise = WidgetService.createWidget(vm.pageId, type);
+            promise
+                .then(function(res) {
+                    var newWidget = res.data;
+                    $location.url('/user/'+vm.userId+'/website/'+vm.websiteId+'/page/'+vm.pageId+'/widget/'+newWidget._id);
+                },
+                function(err) {
+                    alert("could not create widget");
+                });
+
         }
 
     }
