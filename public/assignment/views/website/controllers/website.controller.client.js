@@ -9,7 +9,11 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUserId(vm.userId);
+            var promise = WebsiteService.findWebsitesByUserId(vm.userId);
+            promise
+                .then(function(res) {
+                    vm.websites = res.data;
+                });
         }
         init();
     }
@@ -22,34 +26,63 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
-            vm.singleWebsite = WebsiteService.findWebsiteById(vm.websiteId);
-            vm.websites = WebsiteService.findWebsitesByUserId(vm.userId);
+            var promise = WebsiteService.findWebsiteById(vm.websiteId);
+            promise
+                .then(function(res) {
+                    vm.singleWebsite = res.data;
+                });
+            var websitesPromise = WebsiteService.findWebsitesByUserId(vm.userId);
+            websitesPromise
+                .then(function(res) {
+                    vm.websites = res.data;
+                });
         }
         init();
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.websiteId, website);
+            var promise = WebsiteService.updateWebsite(vm.websiteId, website);
+            promise
+                .then(
+                    function(res){
+                        alert("Successfully updated website");
+                    },
+                    function(err) {
+                        console.log(err);
+                    }
+                );
         }
 
         function deleteWebsite() {
-            WebsiteService.deleteWebsite(vm.websiteId);
+            var promise = WebsiteService.deleteWebsite(vm.websiteId);
+            promise
+                .then(
+                    function(res){
+                        alert("Successfully deleted website");
+                    },
+                    function(err) {
+                        console.log(err);
+                    }
+                );
         }
     }
 
-    function WebsiteNewController(WebsiteService, $routeParams) {
+    function WebsiteNewController(WebsiteService, $routeParams, $location) {
         var vm = this;
         vm.websiteId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
-            vm.websites = WebsiteService.findWebsitesByUserId(vm.userId);
+            var websitesPromise = WebsiteService.findWebsitesByUserId(vm.userId);
+            websitesPromise.then(function(res) {
+                vm.websites = res.data;
+            })
         }
         init();
 
         function createWebsite(website) {
             WebsiteService.createWebsite(vm.userId, website);
+            $location.url('#!/user/'+vm.userId+'/website');
         }
     }
 })();
