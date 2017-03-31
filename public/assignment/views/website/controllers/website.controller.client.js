@@ -18,7 +18,7 @@
         init();
     }
 
-    function WebsiteEditController(WebsiteService, $routeParams) {
+    function WebsiteEditController(WebsiteService, $routeParams, $location) {
         var vm = this;
         vm.websiteId = $routeParams["wid"];
         vm.userId = $routeParams["uid"];
@@ -45,7 +45,7 @@
                 .then(
                     function(res){
                         alert("Successfully updated website");
-                        $location.url('#!/user/'+vm.userId+'/website');
+                        $location.url('/user/'+vm.userId+'/website');
                     },
                     function(err) {
                         console.log(err);
@@ -59,7 +59,7 @@
                 .then(
                     function(res){
                         alert("Successfully deleted website");
-                        $location.url('#!/user/'+vm.userId+'/website');
+                        $location.url('/user/'+vm.userId+'/website');
                     },
                     function(err) {
                         console.log(err);
@@ -84,7 +84,7 @@
 
         function createWebsite(website) {
             WebsiteService.createWebsite(vm.userId, website);
-            $location.url('#!/user/'+vm.userId+'/website');
+            $location.url('/user/'+vm.userId+'/website');
         }
     }
 })();
