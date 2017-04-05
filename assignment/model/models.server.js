@@ -1,6 +1,7 @@
 module.exports = function(app) {
     var mongoose = require('mongoose');
-    mongoose.createConnection("mongodb://127.0.0.1:27017/test");
+    var connectionString = "mongodb://127.0.0.1:27017/test" || process.env.mongo;
+    mongoose.createConnection(connectionString);
 
     var userModel = require("./user/user.model.server")();
     var websiteModel = require("./website/website.model.server")();
