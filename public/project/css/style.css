@@ -130,3 +130,11 @@ iframe {
     height: 60px;
     width: 60px;
 }
+
+.list-group-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    width:100%;
+    display:block;
+}
