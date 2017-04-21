@@ -1,10 +1,53 @@
 <!DOCTYPE html>
+<html lang="en" ng-app="WebAppMaker">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link href="css/jquery-ui.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/textAngular.css" rel="stylesheet"/>
+
+    <!--<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.1/textAngular-rangy.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.1/textAngular-sanitize.js"></script>-->
+
+    <script src="js/app.js"></script>
+    <script src="js/route.js"></script>
+    <script src="views/player.controller.client.js"></script>
+    <script src="services/player.service.client.js"></script>
+
+    <!--<script src="JS/services/user.service.client.js"></script>-->
+    <!--<script src="JS/services/website.service.client.js"></script>-->
+    <!--<script src="JS/services/page.service.client.js"></script>-->
+    <!--<script src="JS/services/widget.service.client.js"></script>-->
+
+    <!--<script src="views/User/login.controller.client.js"></script>-->
+    <!--<script src="views/User/profile.controller.client.js"></script>-->
+    <!--<script src="views/User/register.controller.client.js"></script>-->
+
+    <!--<script src="views/Website/website-list.controller.client.js"></script>-->
+    <!--<script src="views/Website/website-edit.controller.client.js"></script>-->
+    <!--<script src="views/Website/website-new.controller.client.js"></script>-->
+
+    <!--<script src="views/Page/page-list.controller.client.js"></script>-->
+    <!--<script src="views/Page/page-edit.controller.client.js"></script>-->
+    <!--<script src="views/Page/page-new.controller.client.js"></script>-->
+
+    <!--<script src="views/Widget/widget-list.controller.client.js"></script>-->
+    <!--<script src="views/Widget/widget-edit.controller.client.js"></script>-->
+    <!--<script src="views/Widget/widget-new.controller.client.js"></script>-->
+
 </head>
 <body>
-    <h1>Project Home Page</h1>
+<div ng-view></div>
 </body>
 </html>

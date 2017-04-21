@@ -1,0 +1,46 @@
+<div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-text pull-left">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand no-left-padding no-left-margin">
+                    Player List
+                </a>
+            </div>
+        </div>
+    </nav>
+    <input ng-model="model.player.name" class="form-control"/>
+    <a class="btn btn-primary btn-block"
+       ng-click="model.createPlayer(model.player)">
+        Create
+    </a>
+    <br>
+    <ul class="list-group">
+        <div ng-repeat="player in model.players">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10">
+                        {{player.name}}
+                    </div>
+                    <div class="col-xs-1">
+                        <a href="#!/login/{{player._id}}">
+                            <span class="glyphicon glyphicon-cog pull-right"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a ng-click="model.deletePlayer(player._id)" href="#!/login">
+                            <span class="glyphicon glyphicon-remove pull-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>
