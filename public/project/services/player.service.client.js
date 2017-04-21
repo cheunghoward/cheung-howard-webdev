@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("SpotifyPlaylistMaker")
         .factory("PlayerService", playerService);
 
     function playerService($http) {

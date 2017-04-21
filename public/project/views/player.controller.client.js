@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WebAppMaker")
+        .module("SpotifyPlaylistMaker")
         .controller("PlayerListController", PlayerListController)
         .controller("PlayerEditController", PlayerEditController);
 
