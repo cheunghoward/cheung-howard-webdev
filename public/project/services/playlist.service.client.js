@@ -12,7 +12,7 @@
 
         function search(name, searchType) {
             //console.log(queryParams);
-            return $http.get('https://api.spotify.com/v1/search?q='+name+'&type='+searchType);
+            return $http.get('https://api.spotify.com/v1/search?q='+name+'&type='+searchType+'&limit=10');
         }
 
     }

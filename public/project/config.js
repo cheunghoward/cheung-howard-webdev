@@ -20,6 +20,11 @@
                 controller: 'PlaylistController',
                 controllerAs: 'model'
             })
+            .when("/song/:sid", {
+                templateUrl: "views/song/song-detail.view.client.html",
+                controller: 'SongController',
+                controllerAs: 'model'
+            })
             .otherwise({
                 redirectTo: '/login'
             });

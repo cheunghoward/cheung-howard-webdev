@@ -20,7 +20,5 @@
                vm.returnType = searchType;
             });
         }
-
-
     }
 })();
