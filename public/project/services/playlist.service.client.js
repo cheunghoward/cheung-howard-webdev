@@ -4,15 +4,20 @@
         .factory("PlaylistService", playlistService);
 
     function playlistService($http) {
+        var apiUrl = 'https://api.spotify.com/v1';
         var api = {
-            "search": search
+            "search": search,
+            "findTrack": findTrack
         };
 
         return api;
 
         function search(name, searchType) {
-            //console.log(queryParams);
-            return $http.get('https://api.spotify.com/v1/search?q='+name+'&type='+searchType+'&limit=10');
+            return $http.get(apiUrl+'/search?q='+name+'&type='+searchType+'&limit=10');
+        }
+
+        function findTrack(songId) {
+            return $http.get(apiUrl+'/tracks/'+songId);
         }
 
     }
