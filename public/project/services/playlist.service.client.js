@@ -7,7 +7,8 @@
         var apiUrl = 'https://api.spotify.com/v1';
         var api = {
             "search": search,
-            "findTrack": findTrack
+            "findTrack": findTrack,
+            "findArtist": findArtist
         };
 
         return api;
@@ -18,6 +19,10 @@
 
         function findTrack(songId) {
             return $http.get(apiUrl+'/tracks/'+songId);
+        }
+
+        function findArtist(artistId) {
+            return $http.get(apiUrl+'/artists/'+artistId);
         }
 
     }

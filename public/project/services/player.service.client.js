@@ -9,7 +9,8 @@
             "deletePlayer": deletePlayer,
             "findAllPlayers": findAllPlayers,
             "updatePlayer": updatePlayer,
-            "findPlayer": findPlayer
+            "findPlayer": findPlayer,
+            "findPlayerByCredentials": findPlayerByCredentials
         };
 
         return api;
@@ -27,11 +28,15 @@
         }
 
         function findAllPlayers() {
-            return $http.get('/api/player');
+            return $http.get('/api/player/admin');
         }
 
         function findPlayer(pid) {
             return $http.get('/api/player/'+pid);
+        }
+
+        function findPlayerByCredentials(username, password) {
+            return $http.get("/api/player?username="+username+"&password="+password);
         }
     }
 

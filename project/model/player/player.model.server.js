@@ -5,15 +5,13 @@ module.exports = function() {
     var PlayerModel  = mongoose.model("PlayerModel", PlayerSchema);
     var q = require("q");
 
-    var api = {/*
-        "createWebsiteForUser": createWebsiteForUser,
-        "findAllWebsitesForUser": findAllWebsitesForUser,
-        "findWebsiteById": findWebsiteById,
-        "updateWebsite": updateWebsite,
-        "deleteWebsite": deleteWebsite,*/
+    var api = {
         "createPlayer": createPlayer,
         "deletePlayer": deletePlayer,
+        "updatePlayer": updatePlayer,
         "findAllPlayers": findAllPlayers,
+        "findPlayer" : findPlayer,
+        "findPlayerByCredentials" : findPlayerByCredentials,
         "setModel" : setModel
     };
     return api;
@@ -42,14 +40,51 @@ module.exports = function() {
         return deferred.promise;
     }
 
+    function updatePlayer(pid, newPlayer) {
+        var deferred = q.defer();
+        PlayerModel.update({"_id" : pid},
+            {$set : newPlayer}, {multi: true}, function(err, player) {
+                if(err){
+                    deferred.reject(err);
+                }else{
+                    deferred.resolve(player);
+                }
+            });
+        return deferred.promise;
+    }
+
 
     function findAllPlayers(){
         var deferred = q.defer();
-        PlayerModel.find({},function(err,website){
+        PlayerModel.find({},function(err,players){
             if(err){
                 deferred.reject(err);
             }else{
-                deferred.resolve(website);
+                deferred.resolve(players);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findPlayer(pid) {
+        var deferred = q.defer();
+        PlayerModel.findOne({'_id' : pid},function(err,player){
+            if(err){
+                deferred.reject(err);
+            }else{
+                deferred.resolve(player);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findPlayerByCredentials(uId, uPwd) {
+        var deferred = q.defer();
+        PlayerModel.findOne({"username" : uId, "password" : uPwd},function(err,user){
+            if(err){
+                deferred.reject(err);
+            }else{
+                deferred.resolve(user);
             }
         });
         return deferred.promise;
@@ -59,72 +94,4 @@ module.exports = function() {
         model = _model;
     }
 
-/*    function createWebsiteForUser(userId,website){
-        var deferred = q.defer();
-        WebsiteModel.create(website,function(err,website) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                model.userModel.findUserById(userId)
-                    .then(function (user) {
-                        user.websites.push(website);
-                        user.save();
-                        deferred.resolve(website);
-                    }, function (err) {
-                        deferred.reject(err);
-                    });
-            }
-        });
-        return deferred.promise;
-    }
-
-    function findAllWebsitesForUser(userId){
-        var deferred = q.defer();
-        WebsiteModel.find({"_user" : userId},function(err,website){
-            if(err){
-                deferred.reject(err);
-            }else{
-                deferred.resolve(website);
-            }
-        });
-        return deferred.promise;
-    }
-
-    function findWebsiteById(websiteId){
-        var deferred = q.defer();
-        WebsiteModel.findById(websiteId, function(err,website){
-            if(err){
-                deferred.reject(err);
-            }else{
-                deferred.resolve(website);
-            }
-        });
-        return deferred.promise;
-    }
-
-    function updateWebsite(websiteId,newWebsite){
-        var deferred = q.defer();
-        WebsiteModel.update({"_id" : websiteId},
-            {$set : newWebsite}, {multi : true}, function(err,website){
-                if(err){
-                    deferred.reject(err);
-                }else{
-                    deferred.resolve(website);
-                }
-            });
-        return deferred.promise;
-    }
-
-    function deleteWebsite(websiteId){
-        var deferred = q.defer();
-        WebsiteModel.remove({"_id" : websiteId},
-            function(err,website){
-                if(err){
-                    deferred.reject(err);
-                }else{
-                    deferred.resolve(website);
-                }
-            });
-        return deferred.promise;
-    }*/
 };

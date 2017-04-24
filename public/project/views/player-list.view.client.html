@@ -17,7 +17,13 @@
         </div>
     </nav>
     <div class="container-fluid">
-    <input ng-model="model.player.name" class="form-control"/>
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+        <input ng-model="model.player.name" class="form-control" placeholder="name"/>
+        <input ng-model="model.player.username" class="form-control" placeholder="username"/>
+        <input ng-model="model.player.password" type="password" class="form-control" placeholder="password"/>
+        <input ng-model="model.player.email" type="email" class="form-control" placeholder="email"/>
     <a class="btn btn-primary btn-block"
        ng-click="model.createPlayer(model.player)">
         Create
@@ -31,12 +37,12 @@
                         {{player.name}}
                     </div>
                     <div class="col-xs-1">
-                        <a href="#!/login/{{player._id}}">
+                        <a href="#!/profile/{{player._id}}">
                             <span class="glyphicon glyphicon-cog pull-right"></span>
                         </a>
                     </div>
                     <div class="col-xs-1">
-                        <a ng-click="model.deletePlayer(player._id)" href="#!/login">
+                        <a ng-click="model.deletePlayer(player._id)" href="#!/admin">
                             <span class="glyphicon glyphicon-remove pull-right"></span>
                         </a>
                     </div>

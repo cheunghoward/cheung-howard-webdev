@@ -131,6 +131,12 @@ iframe {
     width: 60px;
 }
 
+.img-circle-large {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
 .list-group-item {
     white-space: nowrap;
     overflow: hidden;

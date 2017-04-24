@@ -30,7 +30,7 @@
                     <label>Search Results</label>
                 </li>
                 <li ng-repeat="result in model.searchResults.artists.items" class="list-group-item">
-                    <a>
+                    <a href="#!/artist/{{result.id}}">
                         <img class="img-circle" ng-src="{{result.images[0].url}}" height="60px"/>
                         {{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
