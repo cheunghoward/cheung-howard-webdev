@@ -1,5 +1,8 @@
 module.exports = function(app) {
     var mongoose = require('mongoose');
+    var q = require('q');
+    mongoose.Promise = q.Promise;
+
     var connectionString = process.env.mongo || "mongodb://127.0.0.1:27017/test" ;
     mongoose.createConnection(connectionString);
 

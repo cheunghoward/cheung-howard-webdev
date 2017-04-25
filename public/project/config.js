@@ -13,12 +13,15 @@
             .when("/admin", {
                 templateUrl: "views/player-list.view.client.html",
                 controller: 'PlayerListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                // TODO: Make into checkAdmin
+                resolve : { currentPlayer: checkLoggedIn }
             })
-            .when("/profile/:pid", {
+            .when("/profile/:pid/edit", {
                 templateUrl: "views/player-edit.view.client.html",
                 controller: 'PlayerEditController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn }
             })
             .when("/playlist", {
                 templateUrl: "views/playlist/playlist.view.client.html",
@@ -39,4 +42,20 @@
                 redirectTo: '/login'
             });
     }
+
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/project/loggedin')
+            .then(function(user) {
+                $rootScope.errorMessage = null;
+                if (user.data !== '0') {
+                    $rootScope.currentUser = user.data;
+                    deferred.resolve(user.data);
+                } else {
+                    deferred.reject();
+                    $location.url('/');
+                }
+            });
+        return deferred.promise;
+    };
 })();

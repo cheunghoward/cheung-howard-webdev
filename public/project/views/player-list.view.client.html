@@ -24,10 +24,14 @@
         <input ng-model="model.player.username" class="form-control" placeholder="username"/>
         <input ng-model="model.player.password" type="password" class="form-control" placeholder="password"/>
         <input ng-model="model.player.email" type="email" class="form-control" placeholder="email"/>
-    <a class="btn btn-primary btn-block"
-       ng-click="model.createPlayer(model.player)">
-        Create
-    </a>
+        <a class="btn btn-primary btn-block"
+           ng-click="model.createPlayer(model.player)">
+            Create
+        </a>
+        <a class="btn btn-danger btn-block"
+           ng-click="model.logout()">
+            Logout
+        </a>
     <br>
     <ul class="list-group">
         <div ng-repeat="player in model.players">
@@ -37,7 +41,7 @@
                         {{player.name}}
                     </div>
                     <div class="col-xs-1">
-                        <a href="#!/profile/{{player._id}}">
+                        <a href="#!/profile/{{player._id}}/edit">
                             <span class="glyphicon glyphicon-cog pull-right"></span>
                         </a>
                     </div>

@@ -5,18 +5,28 @@
 
     function playerService($http) {
         var api = {
-            "createPlayer": createPlayer,
+            "register": register,
             "deletePlayer": deletePlayer,
             "findAllPlayers": findAllPlayers,
             "updatePlayer": updatePlayer,
             "findPlayer": findPlayer,
-            "findPlayerByCredentials": findPlayerByCredentials
+            //"findPlayerByCredentials": findPlayerByCredentials,
+            "login" : login,
+            "logout" : logout
         };
 
         return api;
 
-        function createPlayer(player) {
-            return $http.post('/api/player', player);
+        function login(user) {
+            return $http.post("/api/project/login", user);
+        }
+
+        function logout(user) {
+            return $http.post("/api/project/logout");
+        }
+
+        function register(player) {
+            return $http.post('/api/project/register', player);
         }
 
         function deletePlayer(pid) {
@@ -34,10 +44,10 @@
         function findPlayer(pid) {
             return $http.get('/api/player/'+pid);
         }
-
+/*
         function findPlayerByCredentials(username, password) {
             return $http.get("/api/player?username="+username+"&password="+password);
-        }
+        }*/
     }
 
 })();

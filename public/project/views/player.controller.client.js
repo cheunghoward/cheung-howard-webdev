@@ -5,31 +5,42 @@
         .controller("PlayerListController", PlayerListController)
         .controller("PlayerEditController", PlayerEditController);
 
-    function PlayerLoginController(PlayerService, $location) {
+    function PlayerLoginController(PlayerService, $rootScope, $location) {
         var vm = this;
         vm.login = login;
+        //vm.logout = logout;
 
         function login(player) {
-            var promise = PlayerService.findPlayerByCredentials(player.username, player.password);
-            promise
-                .then(function (player) {
-                    var loginUser = player.data;
-                    if(loginUser != null) {
-                        $location.url('/profile/' + loginUser._id);
-                        console.log(loginUser);
-                    } else {
-                        vm.error = 'player not found';
-                    }
-                }, (function(err) {
-                    vm.error = 'user not found';
-                }));
+            PlayerService
+                .login(player)
+                .then(
+                    function(response) {
+                        var player = response.data;
+                        $rootScope.currentUser = player;
+                        $location.url("/admin");
+                        //$location.url("/profile/"+player._id);
+                    },
+                    function(err) {
+                        vm.error = 'user not found';
+                    });
         }
+
     }
 
-    function PlayerListController(PlayerService) {
+    function PlayerListController(PlayerService, $rootScope, $location) {
         var vm = this;
         vm.createPlayer = createPlayer;
         vm.deletePlayer = deletePlayer;
+        vm.logout = logout;
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
+        }
 
         function init() {
             var promise = PlayerService.findAllPlayers();
@@ -39,19 +50,23 @@
         }
         init();
 
+        // Register new user
         function createPlayer(player) {
-            var promise = PlayerService.createPlayer(player);
-            promise.then(function(newPlayer) {
-                if (newPlayer.data != null) {
-                    init()
-                } else {
-                    vm.error = 'Username already exists';
-                }
-            }, (function(err) {
-                vm.error = 'Internal server error';
-            }));
+            PlayerService
+                .register(player)
+                .then(function(response) {
+                        var player = response.data;
+                        if (player != null) {
+                            $rootScope.currentUser = player;
+                            $location.url("/profile/"+player._id);
+                        } else {
+                            // Server sends back a 200 with null data when the username is taken
+                            vm.error = 'Username already exists';
+                        }
+                }, (function(err) {
+                    vm.error = 'Internal server error';
+                }));
         }
-
 
         function deletePlayer(pid) {
             var promise = PlayerService.deletePlayer(pid);
@@ -61,15 +76,15 @@
         }
     }
 
-    function PlayerEditController(PlayerService, $routeParams, $location) {
+    function PlayerEditController(PlayerService, $routeParams, currentPlayer) {
         var vm = this;
         vm.playerId = $routeParams["pid"];
 
         vm.updatePlayer = updatePlayer;
-        vm.findPlayer = findPlayer;
+        //vm.findPlayer = findPlayer;
 
         function init() {
-            findPlayer(vm.playerId);
+            vm.player = currentPlayer;
         }
         init();
 
@@ -79,12 +94,12 @@
                 alert("player has been updated");
             });
         }
-
+/*
         function findPlayer(pid) {
             var promise = PlayerService.findPlayer(pid);
             promise.then(function(result) {
                 vm.player = result.data;
             });
-        }
+        }*/
     }
 })();

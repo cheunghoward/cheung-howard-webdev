@@ -1,15 +1,23 @@
 var express = require('express');
-var app = express();
-
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
+
+var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-var session = require('express-session');
-//app.use(session({ secret: process.env.SESSION_SECRET }));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'local secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // configure a public directory to host static content
