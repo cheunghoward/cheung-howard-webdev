@@ -7,12 +7,15 @@ module.exports = function() {
     mongoose.createConnection(connectionString);
 
     var playerModel = require("./player/player.model.server")();
+    var playlistModel = require("./playlist/playlist.model.server")();
 
     var model = {
-        playerModel: playerModel
+        playerModel: playerModel,
+        playlistModel: playlistModel
     };
 
     playerModel.setModel(model);
+    playlistModel.setModel(model);
 
     return model;
 };
