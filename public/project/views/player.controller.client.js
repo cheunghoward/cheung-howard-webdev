@@ -2,6 +2,7 @@
     angular
         .module("SpotifyPlaylistMaker")
         .controller("PlayerLoginController", PlayerLoginController)
+        .controller("PlayerProfileController", PlayerProfileController)
         .controller("PlayerListController", PlayerListController)
         .controller("PlayerEditController", PlayerEditController);
 
@@ -17,14 +18,28 @@
                     function(response) {
                         var player = response.data;
                         $rootScope.currentUser = player;
-                        $location.url("/admin");
+                        $location.url("/profile");
                         //$location.url("/profile/"+player._id);
                     },
                     function(err) {
                         vm.error = 'user not found';
                     });
         }
+    }
 
+    function PlayerProfileController(PlayerService, $rootScope, currentPlayer) {
+        var vm = this;
+        vm.currentUser = currentPlayer;
+        vm.logout = logout;
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
+        }
     }
 
     function PlayerListController(PlayerService, $rootScope, $location) {
@@ -58,7 +73,7 @@
                         var player = response.data;
                         if (player != null) {
                             $rootScope.currentUser = player;
-                            $location.url("/profile/"+player._id);
+                            //$location.url("/profile/"+player._id+"/edit");
                         } else {
                             // Server sends back a 200 with null data when the username is taken
                             vm.error = 'Username already exists';
@@ -84,7 +99,8 @@
         //vm.findPlayer = findPlayer;
 
         function init() {
-            vm.player = currentPlayer;
+            //vm.player = currentPlayer;
+            findPlayer(vm.playerId);
         }
         init();
 
@@ -94,12 +110,12 @@
                 alert("player has been updated");
             });
         }
-/*
+
         function findPlayer(pid) {
             var promise = PlayerService.findPlayer(pid);
             promise.then(function(result) {
                 vm.player = result.data;
             });
-        }*/
+        }
     }
 })();

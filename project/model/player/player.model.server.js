@@ -12,6 +12,7 @@ module.exports = function() {
         "findAllPlayers": findAllPlayers,
         "findPlayer" : findPlayer,
         "findPlayerByCredentials" : findPlayerByCredentials,
+        "findUserByFaceBookId" : findUserByFacebookId,
         "setModel" : setModel
     };
     return api;
@@ -88,6 +89,10 @@ module.exports = function() {
             }
         });
         return deferred.promise;
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return PlayerModel.findOne({'facebook.id': facebookId});
     }
 
     function setModel(_model) {

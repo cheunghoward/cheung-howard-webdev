@@ -1,4 +1,18 @@
 <div class="container-fluid">
     <img class="img-circle-large" ng-src="{{model.imageUrl}}" height="200"/>
-    <h1>{{model.name}}</h1>
+    <h1>&nbsp{{model.name}}</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item success">
+            <label>Top Tracks</label>
+        </li>
+        <li ng-repeat="result in model.tracks" class="list-group-item">
+            <a href="#!/tracks/{{result.id}}">
+                <img class="" ng-src="{{result.imageUrl}}" height="60px"/>
+                &nbsp{{result.name}}
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            <span class="glyphicon glyphicon-plus pull-right hc-pull-down"></span>
+        </li>
+    </ul>{{model.tracks}}
 </div>

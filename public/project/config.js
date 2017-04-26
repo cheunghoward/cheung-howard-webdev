@@ -10,12 +10,22 @@
                 controller: 'PlayerLoginController',
                 controllerAs: 'model'
             })
+            .when("/register", {
+                templateUrl: "views/player/player-register-template.view.client.html",
+                controller: 'PlayerListController',
+                controllerAs: 'model'
+            })
             .when("/admin", {
                 templateUrl: "views/player-list.view.client.html",
                 controller: 'PlayerListController',
                 controllerAs: 'model',
-                // TODO: Make into checkAdmin
-                resolve : { currentPlayer: checkLoggedIn }
+                resolve : { currentPlayer: checkLoggedIn, adminUser: isAdmin }
+            })
+            .when("/profile", {
+                templateUrl: "views/player/player-profile.view.client.html",
+                controller: 'PlayerProfileController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
             })
             .when("/profile/:pid/edit", {
                 templateUrl: "views/player-edit.view.client.html",
@@ -43,9 +53,25 @@
             });
     }
 
+    var isAdmin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.post('/api/project/isadmin')
+            .then(function(user) {
+                $rootScope.errorMessage = null;
+                if (user.data !== '0') {
+                    $rootScope.currentUser = user.data;
+                    deferred.resolve(user.data);
+                } else {
+                    deferred.reject();
+                    $location.url('/');
+                }
+            });
+        return deferred.promise;
+    };
+
     var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
-        $http.get('/api/project/loggedin')
+        $http.post('/api/project/loggedin')
             .then(function(user) {
                 $rootScope.errorMessage = null;
                 if (user.data !== '0') {

@@ -8,7 +8,8 @@
         var api = {
             "search": search,
             "findTrack": findTrack,
-            "findArtist": findArtist
+            "findArtist": findArtist,
+            "findTracksForArtists": findTracksForArtist
         };
 
         return api;
@@ -25,6 +26,9 @@
             return $http.get(apiUrl+'/artists/'+artistId);
         }
 
+        function findTracksForArtist(artistId) {
+            return $http.get(apiUrl+'/artists/'+artistId+'/top-tracks?country=US');
+        }
     }
 
 })();

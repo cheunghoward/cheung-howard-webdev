@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <h1>Register Player</h1>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <input ng-model="model.player.name" class="form-control" placeholder="name"/>
+    <input ng-model="model.player.username" class="form-control" placeholder="username" required/>
+    <input ng-model="model.player.password" type="password" class="form-control" placeholder="password" required/>
+    <input ng-model="model.player.email" type="email" class="form-control" placeholder="email"/>
+    <a class="btn btn-primary btn-block"
+       ng-click="model.createPlayer(model.player)">
+        Register Player
+    </a>
+</div>

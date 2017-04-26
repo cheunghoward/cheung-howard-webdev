@@ -32,7 +32,7 @@
                 <li ng-repeat="result in model.searchResults.artists.items" class="list-group-item">
                     <a href="#!/artist/{{result.id}}">
                         <img class="img-circle" ng-src="{{result.images[0].url}}" height="60px"/>
-                        {{result.name}}
+                        &nbsp{{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </li>
@@ -46,7 +46,7 @@
                 <li ng-repeat="result in model.searchResults.tracks.items" class="list-group-item">
                     <a href="#!/song/{{result.id}}">
                         <img class="" ng-src="{{result.album.images[0].url}}" height="60px"/>
-                        {{result.name}}
+                        &nbsp{{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </li>
@@ -60,7 +60,7 @@
                 <li ng-repeat="result in model.searchResults.playlists.items" class="list-group-item">
                     <a>
                         <img class="" ng-src="{{result.images[0].url}}" height="60px"/>
-                        {{result.name}}
+                        &nbsp{{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </li>
@@ -74,7 +74,7 @@
                 <li ng-repeat="result in model.searchResults.albums.items" class="list-group-item">
                     <a>
                         <img class="" ng-src="{{result.images[0].url}}" height="60px"/>
-                        {{result.name}}
+                        &nbsp{{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </li>

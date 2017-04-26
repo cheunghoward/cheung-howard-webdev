@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <h1>
+        Profile
+        <button class="btn btn-danger pull-right" ng-click="model.logout()">Logout</button>
+        <div ng-if="model.currentUser.role == admin"><a class="btn btn-warning pull-right" href="#!/admin">Admin</a></div>
+    </h1>
+    <h3>Name</h3>
+    {{model.currentUser.name}}
+    <h3>Username</h3>
+    {{model.currentUser.username}}
+</div>

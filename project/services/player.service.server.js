@@ -8,12 +8,13 @@ module.exports = function(app, model) {
     app.post('/api/project/login', passport.authenticate('local'), login);
     app.post('/api/project/logout', logout);
     app.post('/api/project/register', register);
-    app.get ('/api/project/loggedin', loggedin);
-    app.get('/api/player/admin', findAllPlayers);
+    app.post('/api/project/loggedin', loggedin);
+    app.post('/api/project/isadmin', isAdmin);
+    app.get('/api/player/admin', checkAdmin, findAllPlayers);
     app.get('/api/player', findPlayerDispatch);
     app.get('/api/player/:pid', findPlayer);
-    app.put('/api/player/:pid', updatePlayer);
-    app.delete('/api/player/:pid', deletePlayer);
+    app.put('/api/player/:pid', checkSameUserOrAdmin, updatePlayer);
+    app.delete('/api/player/:pid', checkSameUserOrAdmin, deletePlayer);
 
     function login(req, res) {
         var user = req.user;
@@ -27,6 +28,31 @@ module.exports = function(app, model) {
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    // Handles Angular UI validation
+    function isAdmin(req, res) {
+        res.send(req.isAuthenticated() && req.user.role == 'admin' ? req.user : '0');
+    }
+
+    function checkAdmin(req, res, next) {
+        if(req.user && req.user.role == 'admin') {
+            next();
+        } else {
+            res.send(401);
+        }
+    }
+
+    // Ensure that user updating information is either an admin or that same user
+    function checkSameUserOrAdmin(req, res, next) {
+        if(req.user && req.user.role == 'admin') {
+            next();
+        } else if (req.user && req.user._id == req.params.pid) {
+            next();
+        }
+        else {
+            res.send(401);
+        }
     }
 
     function findPlayerDispatch(req, res) {

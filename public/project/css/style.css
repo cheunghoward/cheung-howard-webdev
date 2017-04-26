@@ -144,3 +144,7 @@ iframe {
     width:100%;
     display:block;
 }
+
+.hc-pull-down {
+    line-height: 4;
+}
