@@ -21,31 +21,31 @@
     </div>
     <br>
     <div class="container-fluid">
-    <ul class="list-group">
-        <div ng-repeat="player in model.players">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-10">
-                        {{player.name}}
+        <input type="text" ng-model="query" ng-change="model.filterPlayers(query)" class="form-control input-lg" placeholder="Search!"/>
+        <ul class="list-group">
+            <div ng-repeat="player in model.players">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            {{player.name}}
+                        </div>
+                        <div class="col-xs-1">
+                            <a href="#!/profile/{{player._id}}/edit">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                        <div class="col-xs-1">
+                            <a ng-click="model.deletePlayer(player._id)" href="#!/admin">
+                                <span class="glyphicon glyphicon-remove pull-right"></span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-xs-1">
-                        <a href="#!/profile/{{player._id}}/edit">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
-                    <div class="col-xs-1">
-                        <a ng-click="model.deletePlayer(player._id)" href="#!/admin">
-                            <span class="glyphicon glyphicon-remove pull-right"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-        </div>
-    </ul>
-
-    <a class="btn btn-danger btn-block"
-       ng-click="model.logout()">
-        Logout
-    </a>
+                </li>
+            </div>
+        </ul>
+        <a class="btn btn-danger btn-block"
+           ng-click="model.logout()">
+            Logout
+        </a>
     </div>
 </div>

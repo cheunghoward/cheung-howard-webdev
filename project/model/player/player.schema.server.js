@@ -3,8 +3,8 @@ module.exports = function(){
 
     var PlayerSchema = mongoose.Schema({
             name : String,
-            username : {type: String, required: true, unique: true},
-            password : {type: String, required: true},
+            username : {type: String, unique: true},
+            password : {type: String},
             email : String,
             role : {type: String, enum: ['admin', 'user'], default: 'user'},
             facebook: {

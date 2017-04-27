@@ -11,6 +11,7 @@
             "updatePlayer": updatePlayer,
             "findPlayer": findPlayer,
             //"findPlayerByCredentials": findPlayerByCredentials,
+            "findPlayerByName": findPlayerByName,
             "login" : login,
             "logout" : logout
         };
@@ -43,6 +44,10 @@
 
         function findPlayer(pid) {
             return $http.get('/api/player/'+pid);
+        }
+
+        function findPlayerByName(name) {
+            return $http.get('/api/player/name/'+name);
         }
 /*
         function findPlayerByCredentials(username, password) {

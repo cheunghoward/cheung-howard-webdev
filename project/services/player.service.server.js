@@ -1,11 +1,19 @@
 module.exports = function(app, model) {
     var passport = require('passport');
+
     var LocalStrategy = require('passport-local').Strategy;
-    passport.serializeUser(serializeUser);
     passport.use(new LocalStrategy(localStrategy));
+
+    passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     app.post('/api/project/login', passport.authenticate('local'), login);
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/#!/profile',
+            failureRedirect: '/project/#!/login'
+        }));
     app.post('/api/project/logout', logout);
     app.post('/api/project/register', register);
     app.post('/api/project/loggedin', loggedin);
@@ -13,8 +21,50 @@ module.exports = function(app, model) {
     app.get('/api/player/admin', checkAdmin, findAllPlayers);
     app.get('/api/player', findPlayerDispatch);
     app.get('/api/player/:pid', findPlayer);
+    app.get('/api/player/name/:name', findPlayerByName);
     app.put('/api/player/:pid', checkSameUserOrAdmin, updatePlayer);
     app.delete('/api/player/:pid', checkSameUserOrAdmin, deletePlayer);
+
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        profileFields: ['id', 'displayName', 'email']
+    };
+    var FacebookStrategy = require('passport-facebook').Strategy;
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        model.playerModel
+            .findPlayerByFaceBookId(profile.id)
+            .then(function(player) {
+                if (player) {
+                    return done(null, player);
+                } else {
+                    var email = profile.emails[0].value;
+                    //var emailParts = email.split("@");
+                    var newFacebookUser = {
+                        name: profile.displayName,
+                        email:     email,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return model.playerModel.createPlayer(newFacebookUser);
+                }
+
+            })
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function login(req, res) {
         var user = req.user;
@@ -127,6 +177,17 @@ module.exports = function(app, model) {
         model.playerModel.findPlayer(pid)
             .then(function(player) {
                 res.status(200).json(player);
+            },
+            function(err) {
+                res.status(404).send('Player not found');
+            });
+    }
+
+    function findPlayerByName(req, res) {
+        var name = req.params.name;
+        model.playerModel.findPlayerByName(name)
+            .then(function(players) {
+                res.status(200).json(players);
             },
             function(err) {
                 res.status(404).send('Player not found');

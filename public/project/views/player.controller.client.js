@@ -27,7 +27,7 @@
         }
     }
 
-    function PlayerProfileController(PlayerService, $rootScope, currentPlayer) {
+    function PlayerProfileController(PlayerService, $rootScope, $location, currentPlayer) {
         var vm = this;
         vm.currentUser = currentPlayer;
         vm.logout = logout;
@@ -47,6 +47,7 @@
         vm.createPlayer = createPlayer;
         vm.deletePlayer = deletePlayer;
         vm.logout = logout;
+        vm.filterPlayers = filterPlayers;
 
         function logout() {
             PlayerService
@@ -64,6 +65,17 @@
             });
         }
         init();
+
+        function filterPlayers(query) {
+            if (query == '') {
+                init();
+            }
+            PlayerService
+                .findPlayerByName(query)
+                .then(function(response) {
+                    vm.players = response.data;
+                });
+        }
 
         // Register new user
         function createPlayer(player) {

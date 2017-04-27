@@ -12,7 +12,8 @@ module.exports = function() {
         "findAllPlayers": findAllPlayers,
         "findPlayer" : findPlayer,
         "findPlayerByCredentials" : findPlayerByCredentials,
-        "findUserByFaceBookId" : findUserByFacebookId,
+        "findPlayerByFaceBookId" : findPlayerByFacebookId,
+        "findPlayerByName" : findPlayerByName,
         "setModel" : setModel
     };
     return api;
@@ -91,8 +92,12 @@ module.exports = function() {
         return deferred.promise;
     }
 
-    function findUserByFacebookId(facebookId) {
+    function findPlayerByFacebookId(facebookId) {
         return PlayerModel.findOne({'facebook.id': facebookId});
+    }
+
+    function findPlayerByName(query) {
+        return PlayerModel.find({'name': {$regex: query, $options: 'i'}});
     }
 
     function setModel(_model) {
