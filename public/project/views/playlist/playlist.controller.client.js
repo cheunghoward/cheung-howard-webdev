@@ -36,7 +36,7 @@
             var playlistId = $routeParams['pid'];
             PlaylistService.addTrackToPlaylist(trackId, playlistId)
                 .then(function (res) {
-                    console.log("song added");
+                    alert("song added");
                 });
         }
     }
@@ -56,6 +56,7 @@
     function PlaylistDetailController(PlaylistService, $routeParams, currentPlayer) {
         var vm = this;
         var playlistId = $routeParams['pid'];
+        vm.playlistId = playlistId;
         vm.removeTrack = removeTrackFromPlaylist;
 
         function init() {
