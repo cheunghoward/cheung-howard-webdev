@@ -3,11 +3,11 @@
         .module("SpotifyPlaylistMaker")
         .controller("PlaylistListController", PlaylistListController)
         .controller("PlaylistNewController", PlaylistNewController)
-        .controller("PlaylistSearchController", PlaylistSearchController);
+        .controller("PlaylistSearchController", PlaylistSearchController)
+        .controller("PlaylistDetailController", PlaylistDetailController);
 
     function PlaylistListController(PlaylistService, currentPlayer) {
         var vm = this;
-        vm.getPlaylist = getPlaylist;
 
         function init() {
             PlaylistService.findPlaylistsForPlayer(currentPlayer._id)
@@ -16,15 +16,6 @@
                 });
         }
         init();
-
-        function getPlaylist(playlistId) {
-            for (var i in vm.playlists) {
-                if (vm.playlists[i]._id == playlistId) {
-                    vm.playlist = vm.playlists[i];
-                    break;
-                }
-            }
-        }
     }
 
     function PlaylistSearchController(PlaylistService, $routeParams) {
@@ -62,4 +53,43 @@
         }
     }
 
+    function PlaylistDetailController(PlaylistService, $routeParams, currentPlayer) {
+        var vm = this;
+        var playlistId = $routeParams['pid'];
+
+        function init() {
+            vm.playlist = [];
+            PlaylistService.findPlaylistById(playlistId)
+                .then(function(res) {
+                    vm.playlistName = res.data.name;
+                    vm.playlistDescription = res.data.description;
+                    var tracks = res.data.tracks;
+
+                    // Grab Spotify data for each track in this playlist
+                    for (var i in tracks) {
+                        PlaylistService
+                            .findTrack(tracks[i])
+                            .then(function(res) {
+                                var data = res.data;
+                                var length = data['duration_ms'];
+                                var track = {id: data['id'], title: data['name'],
+                                    imageUrl: data['album']['images'][0]['url'], artists: data['artists'],
+                                    length: trackLengthInMinutes(length)
+                                };
+                                vm.playlist.push(track);
+                            });
+                    }
+                }, function(err) {
+                    vm.error = err;
+                });
+        }
+        init();
+
+        function trackLengthInMinutes(millis) {
+            var minutes = Math.floor(millis / 60000);
+            var seconds = ((millis % 60000) / 1000).toFixed(0);
+            return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+    }
 })();

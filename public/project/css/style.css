@@ -158,6 +158,17 @@ a:hover {
     text-decoration: none;
 }
 
+thead {
+    font-weight: bold;
+}
+
 .white {
     color: white;
+}
+.hc-hover-show:hover .hc-hover-hide {
+    display : block;
+}
+
+.hc-hover-hide {
+    display: none;
 }

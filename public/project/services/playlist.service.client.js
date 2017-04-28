@@ -12,6 +12,7 @@
             "findTracksForArtists": findTracksForArtist,
             "createPlaylist": createPlaylist,
             "deletePlaylist": deletePlaylist,
+            "findPlaylistById": findPlaylistById,
             "findPlaylistsForPlayer": findPlaylistsForPlayer,
             "addTrackToPlaylist": addTrackToPlaylist
         };
@@ -40,6 +41,10 @@
 
         function deletePlaylist(playlistId) {
             return $http.delete('/api/playlist/'+playlistId);
+        }
+
+        function findPlaylistById(playlistId) {
+            return $http.get('/api/playlist/'+playlistId);
         }
 
         function findPlaylistsForPlayer(playerId) {

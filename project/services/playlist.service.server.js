@@ -3,6 +3,7 @@ module.exports = function(app, model) {
     app.post('/api/playlist/:playerId/new', createPlaylist);
     app.delete('/api/playlist/:playlistId', deletePlaylist);
     app.get('/api/player/:playerId/playlist', findPlaylistsForPlayer);
+    app.get('/api/playlist/:playlistId', findPlaylistById);
     app.put('/api/playlist/:playlistId/:trackId', addTrackToPlaylist);
 
     function createPlaylist(req, res) {
@@ -44,11 +45,21 @@ module.exports = function(app, model) {
                 });
     }
 
+    function findPlaylistById(req, res) {
+        var playlistId = req.params['playlistId'];
+        model.playlistModel.findPlaylistById(playlistId)
+            .then(function(playlist) {
+                res.status(200).json(playlist);
+            }, function(err){
+                res.sendStatus(500).send(err);
+            });
+    }
+
     function addTrackToPlaylist(req, res) {
         var trackId = req.params['trackId'];
         var playlistId = req.params['playlistId'];
         model.playlistModel.addTrackToPlaylist(trackId, playlistId)
-            .then(function(res) {
+            .then(function(response) {
                 res.sendStatus(200);
             }, function(err){
                 res.sendStatus(500).send(err);

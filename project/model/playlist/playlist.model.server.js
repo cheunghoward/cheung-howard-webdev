@@ -8,6 +8,7 @@ module.exports = function() {
     var api = {
         "createPlaylist" : createPlaylist,
         "deletePlaylist" : deletePlaylist,
+        "findPlaylistById": findPlaylistById,
         "findPlaylistsForPlayer" : findPlaylistsForPlayer,
         "addTrackToPlaylist" : addTrackToPlaylist,
         "setModel" : setModel
@@ -49,6 +50,10 @@ module.exports = function() {
                 }
             });
         return deferred.promise;
+    }
+
+    function findPlaylistById(playlistId) {
+        return PlaylistModel.findOne({_id: playlistId});
     }
 
     function findPlaylistsForPlayer(playerId) {

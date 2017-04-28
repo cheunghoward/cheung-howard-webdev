@@ -47,7 +47,7 @@
             })
             .when("/playlist/:pid", {
                 templateUrl: "views/playlist/playlist-detail.view.client.html",
-                controller: 'PlaylistListController',
+                controller: 'PlaylistDetailController',
                 controllerAs: 'model',
                 resolve : { currentPlayer: checkLoggedIn }
             })

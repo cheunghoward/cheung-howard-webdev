@@ -1,3 +1,28 @@
 <div class="container-fluid">
-    Playlist Detail
+    <h2>{{model.playlistName}}</h2>
+    <p>{{model.playlistDescription}}</p>
+    <table class="table table-hover">
+        <thead>
+        <tr class="info">
+            <td></td>
+            <td>Title</td>
+            <td>Artist</td>
+            <td>Length</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hc-hover-show" ng-repeat="result in model.playlist">
+            <td class="col-md-1">
+                <span class="hc-hover-hide glyphicon glyphicon-play"></span>
+            </td>
+            <td class="col-md-3">{{result.title}}</td>
+            <td class="col-md-7">{{result.artists[0].name}}</td>
+            <td class="col-md-3">{{result.length}}</td>
+            <td class="col-md-1">
+                <span class="hc-hover-hide glyphicon glyphicon-remove"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
