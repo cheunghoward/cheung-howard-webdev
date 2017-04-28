@@ -38,7 +38,7 @@
             var playlistId = $routeParams['pid'];
             PlaylistService.addTrackToPlaylist(trackId, playlistId)
                 .then(function (res) {
-                    console.log("song added");
+                    alert("song added");
                 });
         }
     }

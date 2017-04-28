@@ -46,6 +46,12 @@
                 controllerAs: 'model',
                 resolve : { currentPlayer: checkLoggedIn }
             })
+            .when("/playlist/new", {
+                templateUrl: "views/playlist/playlist-new.view.client.html",
+                controller: 'PlaylistNewController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn }
+            })
             .when("/playlist/:pid", {
                 templateUrl: "views/playlist/playlist-detail.view.client.html",
                 controller: 'PlaylistDetailController',
@@ -57,12 +63,6 @@
                 controller: 'PlaylistSearchController',
                 controllerAs: 'model',
                 resolve : { currentPlayer: checkLoggedIn}
-            })
-            .when("/playlist/new", {
-                templateUrl: "views/playlist/playlist-new.view.client.html",
-                controller: 'PlaylistNewController',
-                controllerAs: 'model',
-                resolve : { currentPlayer: checkLoggedIn }
             })
             .when("/song/:sid", {
                 templateUrl: "views/song/song-detail.view.client.html",
