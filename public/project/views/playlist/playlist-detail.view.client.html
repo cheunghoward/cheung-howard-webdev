@@ -7,7 +7,7 @@
             <td></td>
             <td>Title</td>
             <td>Artist</td>
-            <td>Length</td>
+            <td class="hidden-xs">Length</td>
             <td></td>
         </tr>
         </thead>
@@ -18,7 +18,7 @@
             </td>
             <td class="col-md-3">{{result.title}}</td>
             <td class="col-md-7">{{result.artists[0].name}}</td>
-            <td class="col-md-3">{{result.length}}</td>
+            <td class="col-md-3 hidden-xs">{{result.length}}</td>
             <td class="col-md-1">
                 <span ng-click="model.removeTrack(result.id)" class="hc-hover-hide glyphicon glyphicon-remove"></span>
             </td>
