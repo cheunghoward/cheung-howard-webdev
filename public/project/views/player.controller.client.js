@@ -122,6 +122,7 @@
         vm.playerId = $routeParams["pid"];
         vm.makeAdmin = makeAdmin;
         vm.removeAdmin = removeAdmin;
+        vm.logout = logout;
 
         vm.updatePlayer = updatePlayer;
         vm.isAdmin = isAdmin;
@@ -167,6 +168,15 @@
             }, function(err) {
                 vm.error = err;
             });
+        }
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
         }
     }
 })();

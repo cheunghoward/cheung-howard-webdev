@@ -8,6 +8,7 @@
 
     function PlaylistListController(PlaylistService, currentPlayer) {
         var vm = this;
+        vm.logout = logout;
 
         function init() {
             PlaylistService.findPlaylistsForPlayer(currentPlayer._id)
@@ -16,12 +17,22 @@
                 });
         }
         init();
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
+        }
     }
 
     function PlaylistSearchController(PlaylistService, $routeParams) {
         var vm = this;
         vm.search = search;
         vm.addTrackToPlaylist = addTrackToPlaylist;
+        vm.logout = logout;
 
         function search(queryParams) {
             var searchType = queryParams.searchType;
@@ -39,16 +50,35 @@
                     alert("song added");
                 });
         }
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
+        }
     }
 
     function PlaylistNewController(PlaylistService, currentPlayer) {
         var vm = this;
         vm.createPlaylist = createPlaylist;
+        vm.logout = logout;
 
         function createPlaylist(playlist) {
             PlaylistService.createPlaylist(currentPlayer._id, playlist)
                 .then(function(res) {
                     alert("playlist created");
+                });
+        }
+
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
                 });
         }
     }
@@ -58,6 +88,7 @@
         vm.playlistId = $routeParams['pid'];
         var playlistId = $routeParams['pid'];
         vm.removeTrack = removeTrackFromPlaylist;
+        vm.logout = logout;
 
         function init() {
             vm.playlist = [];
@@ -101,5 +132,13 @@
             return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
         }
 
+        function logout() {
+            PlayerService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                });
+        }
     }
 })();
