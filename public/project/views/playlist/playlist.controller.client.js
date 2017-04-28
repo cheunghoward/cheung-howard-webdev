@@ -27,9 +27,10 @@
         }
     }
 
-    function PlaylistSearchController(PlaylistService) {
+    function PlaylistSearchController(PlaylistService, $routeParams) {
         var vm = this;
         vm.search = search;
+        vm.addTrackToPlaylist = addTrackToPlaylist;
 
         function search(queryParams) {
             var searchType = queryParams.searchType;
@@ -38,6 +39,14 @@
                 vm.searchResults = res.data;
                 vm.returnType = searchType;
             });
+        }
+
+        function addTrackToPlaylist(trackId) {
+            var playlistId = $routeParams['pid'];
+            PlaylistService.addTrackToPlaylist(trackId, playlistId)
+                .then(function (res) {
+                    console.log("song added");
+                });
         }
     }
 

@@ -149,6 +149,15 @@ iframe {
     line-height: 4;
 }
 
+.hc-big-plus {
+    line-height: 2;
+    font-size: 2em;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 .white {
     color: white;
 }

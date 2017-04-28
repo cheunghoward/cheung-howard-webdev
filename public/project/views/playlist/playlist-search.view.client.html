@@ -4,7 +4,6 @@
             <select class="form-control input-lg" ng-model="queryParams.searchType">
                 <option value="artist">Artist</option>
                 <option value="album">Album</option>
-                <option value="playlist">Playlist</option>
                 <option value="track">Track</option>
             </select>
         </div>
@@ -47,19 +46,8 @@
                         &nbsp{{result.name}}
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
-                </li>
-            </ul>
-        </div>
-        <div ng-switch-when="playlist">
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    <label>Search Results</label>
-                </li>
-                <li ng-repeat="result in model.searchResults.playlists.items" class="list-group-item">
-                    <a>
-                        <img class="" ng-src="{{result.images[0].url}}" height="60px"/>
-                        &nbsp{{result.name}}
-                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    <a ng-click="model.addTrackToPlaylist(result.id)">
+                        <span class="glyphicon glyphicon-plus pull-right hc-big-plus"></span>
                     </a>
                 </li>
             </ul>

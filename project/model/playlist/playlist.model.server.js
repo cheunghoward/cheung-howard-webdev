@@ -8,11 +8,16 @@ module.exports = function() {
     var api = {
         "createPlaylist" : createPlaylist,
         "deletePlaylist" : deletePlaylist,
-        "findPlaylistsForPlayer": findPlaylistsForPlayer,
+        "findPlaylistsForPlayer" : findPlaylistsForPlayer,
+        "addTrackToPlaylist" : addTrackToPlaylist,
         "setModel" : setModel
     };
 
     return api;
+
+    function addTrackToPlaylist(trackId, playlistId) {
+        return PlaylistModel.update({_id: playlistId}, {$push: {tracks: trackId}});
+    }
 
     function createPlaylist(playerId, playlist) {
         var deferred = q.defer();

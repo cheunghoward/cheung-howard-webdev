@@ -12,7 +12,8 @@
             "findTracksForArtists": findTracksForArtist,
             "createPlaylist": createPlaylist,
             "deletePlaylist": deletePlaylist,
-            "findPlaylistsForPlayer": findPlaylistsForPlayer
+            "findPlaylistsForPlayer": findPlaylistsForPlayer,
+            "addTrackToPlaylist": addTrackToPlaylist
         };
 
         return api;
@@ -42,8 +43,11 @@
         }
 
         function findPlaylistsForPlayer(playerId) {
-            return $http.get('/api/playlist/'+playerId);
+            return $http.get('/api/player/'+playerId+'/playlist');
+        }
+
+        function addTrackToPlaylist(trackId, playlistId) {
+            return $http.put('/api/playlist/'+playlistId+'/'+trackId);
         }
     }
-
 })();

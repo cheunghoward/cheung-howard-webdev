@@ -2,7 +2,8 @@ module.exports = function(app, model) {
     // TODO: add authentication
     app.post('/api/playlist/:playerId/new', createPlaylist);
     app.delete('/api/playlist/:playlistId', deletePlaylist);
-    app.get('/api/playlist/:playerId', findPlaylistsForPlayer);
+    app.get('/api/player/:playerId/playlist', findPlaylistsForPlayer);
+    app.put('/api/playlist/:playlistId/:trackId', addTrackToPlaylist);
 
     function createPlaylist(req, res) {
         var playlist = req.body;
@@ -41,5 +42,16 @@ module.exports = function(app, model) {
                 function(err){
                     res.sendStatus(500).send(err);
                 });
+    }
+
+    function addTrackToPlaylist(req, res) {
+        var trackId = req.params['trackId'];
+        var playlistId = req.params['playlistId'];
+        model.playlistModel.addTrackToPlaylist(trackId, playlistId)
+            .then(function(res) {
+                res.sendStatus(200);
+            }, function(err){
+                res.sendStatus(500).send(err);
+            });
     }
 };
