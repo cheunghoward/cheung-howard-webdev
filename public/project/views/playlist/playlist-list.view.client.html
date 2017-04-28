@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <label>Playlists</label>
+            <a href="#!/playlist/new">
+                <span class="glyphicon glyphicon-plus pull-right white"></span>
+            </a>
+        </li>
+        <li ng-repeat="result in model.playlists" class="list-group-item">
+            <a href="#!/playlist/{{result._id}}">
+                {{result.name}}
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            <br>
+            {{result.description}}
+        </li>
+    </ul>
+</div>

@@ -9,7 +9,10 @@
             "search": search,
             "findTrack": findTrack,
             "findArtist": findArtist,
-            "findTracksForArtists": findTracksForArtist
+            "findTracksForArtists": findTracksForArtist,
+            "createPlaylist": createPlaylist,
+            "deletePlaylist": deletePlaylist,
+            "findPlaylistsForPlayer": findPlaylistsForPlayer
         };
 
         return api;
@@ -28,6 +31,18 @@
 
         function findTracksForArtist(artistId) {
             return $http.get(apiUrl+'/artists/'+artistId+'/top-tracks?country=US');
+        }
+
+        function createPlaylist(playerId, playlist) {
+            return $http.post('/api/playlist/'+playerId+'/new', playlist);
+        }
+
+        function deletePlaylist(playlistId) {
+            return $http.delete('/api/playlist/'+playlistId);
+        }
+
+        function findPlaylistsForPlayer(playerId) {
+            return $http.get('/api/playlist/'+playerId);
         }
     }
 

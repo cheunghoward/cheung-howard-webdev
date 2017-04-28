@@ -2,7 +2,7 @@ module.exports = function(){
     var mongoose = require("mongoose");
 
     var PlaylistSchema = mongoose.Schema({
-            _player : {type : mongoose.Schema.Types.ObjectId, ref : 'webdev.project.players'},
+            _player : {type : mongoose.Schema.Types.ObjectId, ref : 'webdev.project.players', required: true},
             name : String,
             description : String,
             //pages : [{type : mongoose.Schema.Types.ObjectId, ref : 'webdev.assignment.page'}],

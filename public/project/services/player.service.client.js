@@ -12,6 +12,8 @@
             "findPlayer": findPlayer,
             //"findPlayerByCredentials": findPlayerByCredentials,
             "findPlayerByName": findPlayerByName,
+            "makeAdmin": makeAdmin,
+            "removeAdmin": removeAdmin,
             "login" : login,
             "logout" : logout
         };
@@ -48,6 +50,14 @@
 
         function findPlayerByName(name) {
             return $http.get('/api/player/name/'+name);
+        }
+
+        function makeAdmin(pid) {
+            return $http.post('/api/player/'+pid+'/makeadmin');
+        }
+
+        function removeAdmin(pid) {
+            return $http.post('/api/player/'+pid+'/removeadmin');
         }
 /*
         function findPlayerByCredentials(username, password) {

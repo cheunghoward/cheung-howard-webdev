@@ -27,16 +27,40 @@
                 controllerAs: 'model',
                 resolve : { currentPlayer: checkLoggedIn}
             })
+            .when("/profile/:pid", {
+                templateUrl: "views/player/player-profile.view.client.html",
+                controller: 'PlayerProfileController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
+            })
             .when("/profile/:pid/edit", {
                 templateUrl: "views/player-edit.view.client.html",
                 controller: 'PlayerEditController',
                 controllerAs: 'model',
-                resolve : { currentPlayer: checkLoggedIn }
+                resolve : { currentPlayer: checkLoggedIn, isAdmin: isAdmin }
             })
             .when("/playlist", {
-                templateUrl: "views/playlist/playlist.view.client.html",
-                controller: 'PlaylistController',
+                templateUrl: "views/playlist/playlist-list.view.client.html",
+                controller: 'PlaylistListController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn }
+            })
+            .when("/playlist/:pid", {
+                templateUrl: "views/playlist/playlist-detail.view.client.html",
+                controller: 'PlaylistListController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn }
+            })
+            .when("/playlist/:pid/search", {
+                templateUrl: "views/playlist/playlist-search.view.client.html",
+                controller: 'PlaylistSearchController',
                 controllerAs: 'model'
+            })
+            .when("/playlist/new", {
+                templateUrl: "views/playlist/playlist-new.view.client.html",
+                controller: 'PlaylistNewController',
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn }
             })
             .when("/song/:sid", {
                 templateUrl: "views/song/song-detail.view.client.html",

@@ -2,10 +2,16 @@
     <h1>
         Profile
         <button class="btn btn-danger pull-right" ng-click="model.logout()">Logout</button>
-        <a ng-show="model.currentUser.role == 'admin'" class="btn btn-warning pull-right" href="#!/admin">Admin</a>
+        <!--Show this button only if the logged in user is viewing their own profile-->
+        <button ng-show="model.currentPlayer._id == model.profilePlayer._id"
+                class="btn btn-info pull-right"
+                href="#!/profile/{{model.currentPlayer._id}}/edit">
+            Edit
+        </button>
+        <a ng-show="model.currentPlayer.role == 'admin'" class="btn btn-warning pull-right" href="#!/admin">Admin</a>
     </h1>
     <h3>Name</h3>
-    {{model.currentUser.name}}
+    {{model.profilePlayer.name}}
     <h3>Username</h3>
-    {{model.currentUser.username}}
+    {{model.profilePlayer.username}}
 </div>

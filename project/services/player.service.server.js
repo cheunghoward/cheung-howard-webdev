@@ -18,6 +18,8 @@ module.exports = function(app, model) {
     app.post('/api/project/register', register);
     app.post('/api/project/loggedin', loggedin);
     app.post('/api/project/isadmin', isAdmin);
+    app.post('/api/player/:pid/makeadmin', checkAdmin, makeAdmin);
+    app.post('/api/player/:pid/removeadmin', checkAdmin, removeAdmin);
     app.get('/api/player/admin', checkAdmin, findAllPlayers);
     app.get('/api/player', findPlayerDispatch);
     app.get('/api/player/:pid', findPlayer);
@@ -82,7 +84,7 @@ module.exports = function(app, model) {
 
     // Handles Angular UI validation
     function isAdmin(req, res) {
-        res.send(req.isAuthenticated() && req.user.role == 'admin' ? req.user : '0');
+        res.send(req.isAuthenticated() && req.user.role == 'admin');// ? req.user : '0');
     }
 
     function checkAdmin(req, res, next) {
@@ -148,6 +150,26 @@ module.exports = function(app, model) {
                 function(err){
                     res.status(404).send('Player not found for id: ' + pid);
                 });
+    }
+
+    function makeAdmin(req, res) {
+        var pid = req.params.pid;
+        model.playerModel.makeAdmin(pid)
+            .then(function(user){
+                res.sendStatus(200);
+            }, function(err){
+                res.status(404).send('Player not found for id: ' + pid);
+            });
+    }
+
+    function removeAdmin(req, res) {
+        var pid = req.params.pid;
+        model.playerModel.removeAdmin(pid)
+            .then(function(user){
+                res.sendStatus(200);
+            }, function(err){
+                res.status(404).send('Player not found for id: ' + pid);
+            });
     }
 
     function updatePlayer(req, res) {

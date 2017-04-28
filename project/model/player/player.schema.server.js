@@ -11,6 +11,7 @@ module.exports = function(){
                 id:    String,
                 token: String
             },
+            playlists : [{type : mongoose.Schema.Types.ObjectId, ref : 'webdev.project.playlists'}],
             dateCreated : {type : Date , default : Date.now()}
         },
         {collection : 'webdev.project.players'});

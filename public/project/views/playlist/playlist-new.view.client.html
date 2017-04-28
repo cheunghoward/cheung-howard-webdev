@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h1>Create Playlist</h1>
+    <label for="playlist-name">Name</label>
+    <input ng-model="playlist.name"
+           placeholder="Name"
+           class="form-control"
+           id="playlist-name"
+    required="true"/>
+    <label for="playlist-description">Description</label>
+    <textarea ng-model="playlist.description"
+              placeholder="Description"
+              class="form-control"
+              rows="3"
+              id="playlist-description"></textarea>
+    <a ng-click="model.createPlaylist(playlist)" class="btn btn-success" href="#!/playlist">Create</a>
+</div>

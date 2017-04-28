@@ -14,6 +14,8 @@ module.exports = function() {
         "findPlayerByCredentials" : findPlayerByCredentials,
         "findPlayerByFaceBookId" : findPlayerByFacebookId,
         "findPlayerByName" : findPlayerByName,
+        "makeAdmin": makeAdmin,
+        "removeAdmin": removeAdmin,
         "setModel" : setModel
     };
     return api;
@@ -98,6 +100,16 @@ module.exports = function() {
 
     function findPlayerByName(query) {
         return PlayerModel.find({'name': {$regex: query, $options: 'i'}});
+    }
+
+    function makeAdmin(pid) {
+        return PlayerModel.update({'_id': pid},
+            {$set : {'role': 'admin'}}, {multi: true});
+    }
+
+    function removeAdmin(pid) {
+        return PlayerModel.update({'_id': pid},
+            {$set : {'role': 'user'}}, {multi: true});
     }
 
     function setModel(_model) {

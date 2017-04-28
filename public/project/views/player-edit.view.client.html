@@ -1,24 +1,31 @@
 <div class="container-fluid">
     <h1>Edit Player</h1>
 
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-show="model.success" class="alert alert-success" role="alert">
+        {{model.success}}
+    </div>
+
     <label for="name">Name</label>
     <input ng-model="model.player.name" id="name" class="form-control" type="text" placeholder="Player Name"/>
-    <a ng-click="model.updatePlayer(model.player)" class="btn btn-primary btn-block">
+
+    <h1>Profile</h1>
+
+    <label for="email">Email</label>
+    <input ng-model="model.player.email" id="email" class="form-control" type="email" placeholder="Email"/>
+
+    <label>Username</label>
+    <input ng-model="model.player.username" class="form-control" type="text" placeholder="Username"/>
+
+    <label>Password</label>
+    <input ng-model="model.player.password" class="form-control" type="password" placeholder="Password"/>
+
+    <a ng-click="model.updatePlayer(model.player)" class="btn btn-primary">
         Update
     </a>
-
-    <div class="container-fluid">
-        <h1>Profile</h1>
-
-        <label for="email">Email</label>
-        <input ng-model="model.player.email" id="email" class="form-control" type="email" placeholder="Email"/>
-
-        <label>Username</label>
-        <input ng-model="model.player.username" class="form-control" type="text" placeholder="Username"/>
-
-        <label>Password</label>
-        <input ng-model="model.player.password" class="form-control" type="password" placeholder="Password"/>
-
-    </div>
+    <a ng-show="model.isAdmin && model.player.role != 'admin'" ng-click="model.makeAdmin(model.player._id)" class="btn btn-info">Make Admin</a>
+    <a ng-show="model.isAdmin && model.player.role == 'admin'"ng-click="model.removeAdmin(model.player._id)" class="btn btn-danger">Remove Admin</a>
 
 </div>

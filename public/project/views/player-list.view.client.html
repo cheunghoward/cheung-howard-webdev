@@ -2,8 +2,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-text pull-left">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
+                <span class="glyphicon glyphicon-chevron-left"></span>
             </div>
             <div class="navbar-text pull-right">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -16,12 +15,14 @@
             </div>
         </div>
     </nav>
-    <div ng-include="'views/player/player-register-template.view.client.html'">
-
-    </div>
+    <div ng-include="'views/player/player-register-template.view.client.html'"></div>
     <br>
     <div class="container-fluid">
-        <input type="text" ng-model="query" ng-change="model.filterPlayers(query)" class="form-control input-lg" placeholder="Search!"/>
+        <div class="input-group">
+            <span class="input-group-addon glyphicon-filter glyphicon"></span>
+            <input type="text" ng-model="query" ng-change="model.filterPlayers(query)" class="form-control input-lg" placeholder="Filter results..."/>
+        </div>
+        <br>
         <ul class="list-group">
             <div ng-repeat="player in model.players">
                 <li class="list-group-item">

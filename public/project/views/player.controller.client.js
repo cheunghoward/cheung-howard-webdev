@@ -18,8 +18,7 @@
                     function(response) {
                         var player = response.data;
                         $rootScope.currentUser = player;
-                        $location.url("/profile");
-                        //$location.url("/profile/"+player._id);
+                        $location.url("/profile/"+player._id);
                     },
                     function(err) {
                         vm.error = 'user not found';
@@ -27,10 +26,24 @@
         }
     }
 
-    function PlayerProfileController(PlayerService, $rootScope, $location, currentPlayer) {
+    function PlayerProfileController(PlayerService, $routeParams, $rootScope, $location, currentPlayer) {
         var vm = this;
-        vm.currentUser = currentPlayer;
+        var pid = $routeParams['pid'];
+        vm.currentPlayer = currentPlayer;
+
+        // If user navigates to /profile, redirect to their own profile.
+        if (!pid) {
+            $location.url('/profile/'+currentPlayer._id);
+        }
+
         vm.logout = logout;
+
+        PlayerService
+            .findPlayer(pid)
+            .then(function(res) {
+                vm.profilePlayer = res.data;
+            });
+
 
         function logout() {
             PlayerService
@@ -86,6 +99,7 @@
                         if (player != null) {
                             $rootScope.currentUser = player;
                             //$location.url("/profile/"+player._id+"/edit");
+                            init();
                         } else {
                             // Server sends back a 200 with null data when the username is taken
                             vm.error = 'Username already exists';
@@ -103,11 +117,14 @@
         }
     }
 
-    function PlayerEditController(PlayerService, $routeParams, currentPlayer) {
+    function PlayerEditController(PlayerService, $routeParams, isAdmin) {
         var vm = this;
         vm.playerId = $routeParams["pid"];
+        vm.makeAdmin = makeAdmin;
+        vm.removeAdmin = removeAdmin;
 
         vm.updatePlayer = updatePlayer;
+        vm.isAdmin = isAdmin;
         //vm.findPlayer = findPlayer;
 
         function init() {
@@ -120,6 +137,8 @@
             var promise = PlayerService.updatePlayer(player._id, player);
             promise.then(function(_) {
                 alert("player has been updated");
+            }, function(err) {
+                vm.error = err;
             });
         }
 
@@ -127,6 +146,26 @@
             var promise = PlayerService.findPlayer(pid);
             promise.then(function(result) {
                 vm.player = result.data;
+            });
+        }
+
+        function makeAdmin(pid) {
+            var promise = PlayerService.makeAdmin(pid);
+            promise.then(function(result) {
+                init();
+                vm.success = "Successfully made admin";
+            }, function(err) {
+                vm.error = err;
+            });
+        }
+
+        function removeAdmin(pid) {
+            var promise = PlayerService.removeAdmin(pid);
+            promise.then(function(result) {
+                init();
+                vm.success = "Successfully removed admin";
+            }, function(err) {
+                vm.error = err;
             });
         }
     }
