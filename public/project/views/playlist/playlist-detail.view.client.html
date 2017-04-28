@@ -20,7 +20,7 @@
             <td class="col-md-7">{{result.artists[0].name}}</td>
             <td class="col-md-3">{{result.length}}</td>
             <td class="col-md-1">
-                <span class="hc-hover-hide glyphicon glyphicon-remove"></span>
+                <span ng-click="model.removeTrack(result.id)" class="hc-hover-hide glyphicon glyphicon-remove"></span>
             </td>
         </tr>
         </tbody>

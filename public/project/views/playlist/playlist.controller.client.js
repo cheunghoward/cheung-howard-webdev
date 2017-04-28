@@ -56,6 +56,7 @@
     function PlaylistDetailController(PlaylistService, $routeParams, currentPlayer) {
         var vm = this;
         var playlistId = $routeParams['pid'];
+        vm.removeTrack = removeTrackFromPlaylist;
 
         function init() {
             vm.playlist = [];
@@ -84,6 +85,14 @@
                 });
         }
         init();
+
+        function removeTrackFromPlaylist(trackId) {
+            PlaylistService
+                .removeTrackFromPlaylist(trackId, playlistId)
+                .then(function (res) {
+                    init();
+                });
+        }
 
         function trackLengthInMinutes(millis) {
             var minutes = Math.floor(millis / 60000);

@@ -14,7 +14,8 @@
             "deletePlaylist": deletePlaylist,
             "findPlaylistById": findPlaylistById,
             "findPlaylistsForPlayer": findPlaylistsForPlayer,
-            "addTrackToPlaylist": addTrackToPlaylist
+            "addTrackToPlaylist": addTrackToPlaylist,
+            "removeTrackFromPlaylist": removeTrackFromPlaylist
         };
 
         return api;
@@ -53,6 +54,10 @@
 
         function addTrackToPlaylist(trackId, playlistId) {
             return $http.put('/api/playlist/'+playlistId+'/'+trackId);
+        }
+
+        function removeTrackFromPlaylist(trackId, playlistId) {
+            return $http.delete('/api/playlist/'+playlistId+'/'+trackId);
         }
     }
 })();

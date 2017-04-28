@@ -172,3 +172,11 @@ thead {
 .hc-hover-hide {
     display: none;
 }
+
+.glyphicon-remove {
+    color: red;
+}
+
+.glyphicon-play {
+    color: #2ebd59;
+}

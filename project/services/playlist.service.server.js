@@ -5,6 +5,7 @@ module.exports = function(app, model) {
     app.get('/api/player/:playerId/playlist', findPlaylistsForPlayer);
     app.get('/api/playlist/:playlistId', findPlaylistById);
     app.put('/api/playlist/:playlistId/:trackId', addTrackToPlaylist);
+    app.delete('/api/playlist/:playlistId/:trackId', removeTrackFromPlaylist);
 
     function createPlaylist(req, res) {
         var playlist = req.body;
@@ -59,6 +60,17 @@ module.exports = function(app, model) {
         var trackId = req.params['trackId'];
         var playlistId = req.params['playlistId'];
         model.playlistModel.addTrackToPlaylist(trackId, playlistId)
+            .then(function(response) {
+                res.sendStatus(200);
+            }, function(err){
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function removeTrackFromPlaylist(req, res) {
+        var trackId = req.params['trackId'];
+        var playlistId = req.params['playlistId'];
+        model.playlistModel.removeTrackFromPlaylist(trackId, playlistId)
             .then(function(response) {
                 res.sendStatus(200);
             }, function(err){

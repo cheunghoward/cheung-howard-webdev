@@ -11,14 +11,11 @@ module.exports = function() {
         "findPlaylistById": findPlaylistById,
         "findPlaylistsForPlayer" : findPlaylistsForPlayer,
         "addTrackToPlaylist" : addTrackToPlaylist,
+        "removeTrackFromPlaylist" : removeTrackFromPlaylist,
         "setModel" : setModel
     };
 
     return api;
-
-    function addTrackToPlaylist(trackId, playlistId) {
-        return PlaylistModel.update({_id: playlistId}, {$push: {tracks: trackId}});
-    }
 
     function createPlaylist(playerId, playlist) {
         var deferred = q.defer();
@@ -66,6 +63,14 @@ module.exports = function() {
             }
         });
         return deferred.promise;
+    }
+
+    function addTrackToPlaylist(trackId, playlistId) {
+        return PlaylistModel.update({_id: playlistId}, {$push: {tracks: trackId}});
+    }
+
+    function removeTrackFromPlaylist(trackId, playlistId) {
+        return PlaylistModel.update({_id: playlistId}, {$pull: {tracks: trackId}});
     }
 
     function setModel(_model) {
