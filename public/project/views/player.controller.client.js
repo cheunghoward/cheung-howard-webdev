@@ -26,7 +26,7 @@
         }
     }
 
-    function PlayerProfileController(PlayerService, $routeParams, $rootScope, $location, currentPlayer) {
+    function PlayerProfileController(PlayerService, PlaylistService, $routeParams, $rootScope, $location, currentPlayer) {
         var vm = this;
         var pid = $routeParams['pid'];
         vm.currentPlayer = currentPlayer;
@@ -44,6 +44,10 @@
                 vm.profilePlayer = res.data;
             });
 
+        PlaylistService.findPlaylistsForPlayer(pid)
+            .then(function(res) {
+                vm.playlists = res.data;
+            });
 
         function logout() {
             PlayerService

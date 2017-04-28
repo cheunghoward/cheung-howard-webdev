@@ -62,6 +62,7 @@
             vm.playlist = [];
             PlaylistService.findPlaylistById(playlistId)
                 .then(function(res) {
+                    vm.playlistId = playlistId;
                     vm.playlistName = res.data.name;
                     vm.playlistDescription = res.data.description;
                     var tracks = res.data.tracks;

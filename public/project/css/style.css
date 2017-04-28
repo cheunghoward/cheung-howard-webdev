@@ -51,7 +51,7 @@ iframe {
 .hc-search-bar .glyphicon-search{
     font-size: 23px;
 }
-
+/*
 .navbar-default {
     background-color: #4285f4;
     border-color: #0d47a1;
@@ -104,7 +104,7 @@ iframe {
 }
 .navbar-default .navbar-link:hover {
     color: #ecf0f1;
-}
+}*/
 
 .glyphicon {
     color: #999999;
@@ -179,4 +179,8 @@ thead {
 
 .glyphicon-play {
     color: #2ebd59;
+}
+
+.navbar-project {
+    background-color: #2e2f33;
 }

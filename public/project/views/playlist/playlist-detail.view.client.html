@@ -1,5 +1,8 @@
 <div class="container-fluid">
-    <h2>{{model.playlistName}}</h2>
+    <h2>
+        {{model.playlistName}}
+        <a href="#!/playlist/{{model.playlistId}}/search" class="btn btn-info pull-right" role="button">Add tracks</a>
+    </h2>
     <p>{{model.playlistDescription}}</p>
     <table class="table table-hover">
         <thead>
