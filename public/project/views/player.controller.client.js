@@ -102,7 +102,7 @@
                         var player = response.data;
                         if (player != null) {
                             $rootScope.currentUser = player;
-                            //$location.url("/profile/"+player._id+"/edit");
+                            $location.url("/profile/"+player._id);
                             init();
                         } else {
                             // Server sends back a 200 with null data when the username is taken

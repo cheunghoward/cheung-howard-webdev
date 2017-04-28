@@ -8,24 +8,21 @@
         {{model.success}}
     </div>
 
-    <label for="name">Name</label>
-    <input ng-model="model.player.name" id="name" class="form-control" type="text" placeholder="Player Name"/>
-
-    <h1>Profile</h1>
-
-    <label for="email">Email</label>
-    <input ng-model="model.player.email" id="email" class="form-control" type="email" placeholder="Email"/>
-
-    <label>Username</label>
-    <input ng-model="model.player.username" class="form-control" type="text" placeholder="Username"/>
-
-    <label>Password</label>
-    <input ng-model="model.player.password" class="form-control" type="password" placeholder="Password"/>
-
+    <label for="player-name">Name</label>
+    <input id="player-name" ng-model="model.player.name" class="form-control" placeholder="name"/>
+    <label for="player-username">Username</label>
+    <input id="player-username" ng-model="model.player.username" class="form-control" placeholder="username" required/>
+    <label for="player-password">Password</label>
+    <input id="player-password" ng-model="model.player.password" type="password" class="form-control" placeholder="password" required/>
+    <label for="player-email">Email</label>
+    <input id="player-email" ng-model="model.player.email" type="email" class="form-control" placeholder="email"/>
+    <label for="player-profile">Profile</label>
+    <input id="player-profile" ng-model="model.player.profile" type="text" rows="3" class="form-control" placeholder="Born and raised in Boston..."/>
+    <label for="player-favoriteArtists">Favorite Artists</label>
+    <textarea id="player-favoriteArtists" ng-model="model.player.favoriteArtists" type="text" rows="3" class="form-control" placeholder="The Beatles, Bruno Mars,..."/>
     <a ng-click="model.updatePlayer(model.player)" class="btn btn-primary">
         Update
     </a>
     <a ng-show="model.isAdmin && model.player.role != 'admin'" ng-click="model.makeAdmin(model.player._id)" class="btn btn-info">Make Admin</a>
     <a ng-show="model.isAdmin && model.player.role == 'admin'"ng-click="model.removeAdmin(model.player._id)" class="btn btn-danger">Remove Admin</a>
-
 </div>

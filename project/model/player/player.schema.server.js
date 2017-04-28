@@ -6,6 +6,8 @@ module.exports = function(){
             username : {type: String, unique: true},
             password : {type: String},
             email : String,
+            favoriteArtists: String,
+            profile: String,
             role : {type: String, enum: ['admin', 'user'], default: 'user'},
             facebook: {
                 id:    String,

@@ -1,52 +1,47 @@
-<div>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-text pull-left">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </div>
-            <div class="navbar-text pull-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
-            <div class="navbar-header">
-                <a class="navbar-brand no-left-padding no-left-margin">
-                    Player List
-                </a>
+<div class="container-fluid">
+    <h1>Admin Tools</h1>
+
+    <h2>Manage Players (Users)</h2>
+    <p>Click the gear icon to for expanded view and ability to toggle player's admin status</p>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="container-fluid" ng-include="'views/player/player-register-template.view.client.html'"><br></div>
             </div>
         </div>
-    </nav>
-    <div ng-include="'views/player/player-register-template.view.client.html'"></div>
-    <br>
-    <div class="container-fluid">
-        <div class="input-group">
-            <span class="input-group-addon glyphicon-filter glyphicon"></span>
-            <input type="text" ng-model="query" ng-change="model.filterPlayers(query)" class="form-control input-lg" placeholder="Filter results..."/>
-        </div>
-        <br>
-        <ul class="list-group">
-            <div ng-repeat="player in model.players">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-xs-10">
-                            {{player.name}}
-                        </div>
-                        <div class="col-xs-1">
-                            <a href="#!/profile/{{player._id}}/edit">
-                                <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a>
-                        </div>
-                        <div class="col-xs-1">
-                            <a ng-click="model.deletePlayer(player._id)" href="#!/admin">
-                                <span class="glyphicon glyphicon-remove pull-right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            </div>
-        </ul>
-        <a class="btn btn-danger btn-block"
-           ng-click="model.logout()">
-            Logout
-        </a>
     </div>
+    <br>
+
+    <div class="input-group">
+        <span class="input-group-addon glyphicon-filter glyphicon"></span>
+        <input type="text" ng-model="query" ng-change="model.filterPlayers(query)" class="form-control input-lg" placeholder="Filter results..."/>
+    </div>
+    <br>
+    <ul class="list-group">
+        <div ng-repeat="player in model.players">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10">
+                        {{player.name}}
+                    </div>
+                    <div class="col-xs-1">
+                        <a href="#!/profile/{{player._id}}/edit">
+                            <span class="glyphicon glyphicon-cog pull-right"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a ng-click="model.deletePlayer(player._id)" href="#!/admin">
+                            <span class="glyphicon glyphicon-remove pull-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </div>
+    </ul>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Register New Player</button>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.logout()">
+        Logout
+    </a>
 </div>
