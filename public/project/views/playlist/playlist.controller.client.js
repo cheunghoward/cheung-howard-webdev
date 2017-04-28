@@ -8,6 +8,7 @@
 
     function PlaylistListController(PlaylistService, currentPlayer) {
         var vm = this;
+        vm.currentPlayer = currentPlayer;
 
         function init() {
             PlaylistService.findPlaylistsForPlayer(currentPlayer._id)
@@ -18,10 +19,11 @@
         init();
     }
 
-    function PlaylistSearchController(PlaylistService, $routeParams) {
+    function PlaylistSearchController(PlaylistService, $routeParams, currentPlayer) {
         var vm = this;
         vm.search = search;
         vm.addTrackToPlaylist = addTrackToPlaylist;
+        vm.currentPlayer = currentPlayer;
 
         function search(queryParams) {
             var searchType = queryParams.searchType;
@@ -44,6 +46,7 @@
     function PlaylistNewController(PlaylistService, currentPlayer) {
         var vm = this;
         vm.createPlaylist = createPlaylist;
+        vm.currentPlayer = currentPlayer;
 
         function createPlaylist(playlist) {
             PlaylistService.createPlaylist(currentPlayer._id, playlist)
@@ -57,6 +60,7 @@
         var vm = this;
         var playlistId = $routeParams['pid'];
         vm.removeTrack = removeTrackFromPlaylist;
+        vm.currentPlayer = currentPlayer;
 
         function init() {
             vm.playlist = [];

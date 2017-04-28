@@ -6,9 +6,10 @@
         .controller("PlayerListController", PlayerListController)
         .controller("PlayerEditController", PlayerEditController);
 
-    function PlayerLoginController(PlayerService, $rootScope, $location) {
+    function PlayerLoginController(PlayerService, $rootScope, $location, currentPlayer) {
         var vm = this;
         vm.login = login;
+        vm.currentPlayer = currentPlayer;
         //vm.logout = logout;
 
         function login(player) {
@@ -59,12 +60,13 @@
         }
     }
 
-    function PlayerListController(PlayerService, $rootScope, $location) {
+    function PlayerListController(PlayerService, $rootScope, $location, currentPlayer) {
         var vm = this;
         vm.createPlayer = createPlayer;
         vm.deletePlayer = deletePlayer;
         vm.logout = logout;
         vm.filterPlayers = filterPlayers;
+        vm.currentPlayer = currentPlayer;
 
         function logout() {
             PlayerService

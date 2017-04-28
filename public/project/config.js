@@ -8,7 +8,8 @@
             .when("/login", {
                 templateUrl: "views/player/login.view.client.html",
                 controller: 'PlayerLoginController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
             })
             .when("/register", {
                 templateUrl: "views/player/player-register-template.view.client.html",
@@ -54,7 +55,8 @@
             .when("/playlist/:pid/search", {
                 templateUrl: "views/playlist/playlist-search.view.client.html",
                 controller: 'PlaylistSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
             })
             .when("/playlist/new", {
                 templateUrl: "views/playlist/playlist-new.view.client.html",
@@ -65,12 +67,14 @@
             .when("/song/:sid", {
                 templateUrl: "views/song/song-detail.view.client.html",
                 controller: 'SongController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
             })
             .when("/artist/:aid", {
                 templateUrl: "views/artist/artist-detail.view.client.html",
                 controller: 'ArtistController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve : { currentPlayer: checkLoggedIn}
             })
             .otherwise({
                 redirectTo: '/login'
